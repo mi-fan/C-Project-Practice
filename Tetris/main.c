@@ -1,11 +1,10 @@
 #include "common.h"
 
 // global variable
-int i, j, tmp, tmp1, tmp2;
-int a[80][80] = { 0 };
-int b[4];
+int tmp, tmp1, tmp2;
+int gameArea[80][80] = { 0 };
+int gamePiece[4];
 
-void drawGameFrame(void);
 void flag(struct Tetris *);
 void makeTetris(struct Tetris *);
 void printTetris(struct Tetris *);

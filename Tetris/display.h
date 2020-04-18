@@ -3,3 +3,4 @@
 
 void title(void);
 void welcome(void);
+void drawGameFrame(void);

@@ -1,5 +1,6 @@
-#include "display.h"
+ï»¿#include "display.h"
 
+extern int gameArea[80][80];
 /*
  * set the welcome title
  */
@@ -10,39 +11,39 @@ void title() {
 
 	color(11);
 	gotoxy(18, 5);
-	printf("¡ö");
+	printf("â– ");
 	gotoxy(18, 6);
-	printf("¡ö¡ö");
+	printf("â– â– ");
 	gotoxy(18, 7);
-	printf("¡ö");
+	printf("â– ");
 
 	color(14);
 	gotoxy(26, 6);
-	printf("¡ö¡ö");
+	printf("â– â– ");
 	gotoxy(28, 7);
-	printf("¡ö¡ö");
+	printf("â– â– ");
 
 	color(10);
 	gotoxy(36, 6);
-	printf("¡ö¡ö");
+	printf("â– â– ");
 	gotoxy(36, 7);
-	printf("¡ö¡ö");
+	printf("â– â– ");
 
 	color(13);
 	gotoxy(45, 5);
-	printf("¡ö");
+	printf("â– ");
 	gotoxy(45, 6);
-	printf("¡ö");
+	printf("â– ");
 	gotoxy(45, 7);
-	printf("¡ö");
+	printf("â– ");
 	gotoxy(45, 8);
-	printf("¡ö");
+	printf("â– ");
 
 	color(12);
 	gotoxy(52, 6);
-	printf("¡ö");
+	printf("â– ");
 	gotoxy(52, 7);
-	printf("¡ö¡ö¡ö¡ö");
+	printf("â– â– â– â– ");
 }
 
 /*
@@ -86,6 +87,7 @@ void welcome() {
 	switch (res) {
 	case 1:
 		system("cls");
+		drawGameFrame();     //show the game window
 		break;
 	case 2:
 	case 3:
@@ -93,5 +95,65 @@ void welcome() {
 	default:
 		break;
 
+	}
+}
+
+void drawGameFrame(void) {
+	int i;
+
+	gotoxy(FRAME_X + FRAME_WIDTH - 7, FRAME_Y - 2);
+	color(11);
+	printf("TTTTTTetris!");   // game window title
+
+	gotoxy(FRAME_X + 2*FRAME_WIDTH + 3, FRAME_Y +7);
+	color(2);
+	printf("**********");     // top line for next piece area
+
+	gotoxy(FRAME_X + 2 * FRAME_WIDTH + 13, FRAME_Y + 7);
+	color(3);
+	printf("NEXT PIECE");     // show text
+
+	gotoxy(FRAME_X + 2 * FRAME_WIDTH + 3, FRAME_Y + 13);
+	color(2);
+	printf("**********");     // bottom line for next piece area
+
+	printf("NEXT PIECE");     // show text
+
+	gotoxy(FRAME_X + 2 * FRAME_WIDTH + 3, FRAME_Y + 15);
+	color(14);
+	printf("  â†‘ : rotate");     // explaination
+
+	gotoxy(FRAME_X + 2 * FRAME_WIDTH + 3, FRAME_Y + 19);
+	color(14);
+	printf("SPACE: pause");      // explaination
+
+	gotoxy(FRAME_X + 2 * FRAME_WIDTH + 3, FRAME_Y + 17);
+	color(14);
+	printf(" ESC : exit");       // explaination
+
+	gameArea[FRAME_X][FRAME_Y + FRAME_HEIGHT] = 2;
+	gameArea[FRAME_X + 2*FRAME_WIDTH - 2][FRAME_Y + FRAME_HEIGHT] = 2;
+
+	for (i = 1; i < 2 * FRAME_WIDTH -1; i++) {                  // print the top line of game area
+		gotoxy(FRAME_X + i, FRAME_Y);
+		printf("=");
+	}
+
+	for (i = 1; i < 2 * FRAME_WIDTH - 1; i++) {                                  // print the bottome line of game area
+		gotoxy(FRAME_X + i, FRAME_Y + FRAME_HEIGHT);
+		printf("=");
+		gameArea[FRAME_X + i][FRAME_Y + FRAME_HEIGHT] = FLAG_BOUNDRY;        // mark the bottom of game area, to keep pieces inside the boundry
+	}
+
+	for (i = 1; i < FRAME_HEIGHT; i++) {                                     // print the bottome line of game area
+		gotoxy(FRAME_X, FRAME_Y + i);
+		printf("â€–");
+		gameArea[FRAME_X][FRAME_Y + i] = FLAG_BOUNDRY;                       // mark the left boundry of game area
+	}
+
+	for (i = 1; i < FRAME_HEIGHT; i++) {                                     // print the left line of game area
+		gotoxy(FRAME_X + 2*FRAME_WIDTH - 2, FRAME_Y + i);
+		printf("â€–");
+		gameArea[FRAME_X + 2 * FRAME_WIDTH - 2][FRAME_Y + i] = FLAG_BOUNDRY; // mark the right boundry of game area
 	}
 }
