@@ -1,6 +1,8 @@
 ﻿#include "display.h"
 
-extern int gameArea[80][80];
+extern int gameArea[AREA_HEIGHT][AREA_WIDTH];
+extern int gamePiece[BLOCK_COUNT];
+
 /*
  * set the welcome title
  */
@@ -156,4 +158,204 @@ void drawGameFrame(void) {
 		printf("‖");
 		gameArea[FRAME_X + 2 * FRAME_WIDTH - 2][FRAME_Y + i] = FLAG_BOUNDRY; // mark the right boundry of game area
 	}
+}
+
+// make the Tetris pieces
+// 7 basic pieces
+// 19 placing pieces 
+// gamePiece[0] is central block of one game piece
+void makeTetris(struct Tetris* tet) {
+	gameArea[tet->x][tet->y] = gamePiece[0];       // set current piece central block coordinate to Tetris structure
+
+	switch (tet->flag) {
+	case T_SQUARE:
+	{
+		color(10);
+		gameArea[tet->x][tet->y - 1] = gamePiece[1];   //set the other 3 blocks to game area
+		gameArea[tet->x + 2][tet->y - 1] = gamePiece[2];
+		gameArea[tet->x + 2][tet->y] = gamePiece[3];
+		break;
+	}
+	case T_LINE_HORIZ:
+	{
+		color(13);
+		gameArea[tet->x - 2][tet->y] = gamePiece[1];
+		gameArea[tet->x + 2][tet->y] = gamePiece[2];
+		gameArea[tet->x + 4][tet->y] = gamePiece[3];
+		break;
+	}
+	case T_LINE_VERT:
+	{
+		color(13);
+		gameArea[tet->x][tet->y - 1] = gamePiece[1];
+		gameArea[tet->x][tet->y + 1] = gamePiece[2];
+		gameArea[tet->x][tet->y + 2] = gamePiece[3];
+		break;
+	}
+	case T_TSHAPE_DOWN:
+	{
+		color(11);
+		gameArea[tet->x - 2][tet->y] = gamePiece[1];
+		gameArea[tet->x + 2][tet->y] = gamePiece[2];
+		gameArea[tet->x][tet->y + 1] = gamePiece[3];
+		break;
+	}
+	case T_TSHAPE_LEFT:
+	{
+		color(11);
+		gameArea[tet->x - 2][tet->y] = gamePiece[1];
+		gameArea[tet->x][tet->y - 1] = gamePiece[2];
+		gameArea[tet->x][tet->y + 1] = gamePiece[3];
+		break;
+	}
+	case T_TSHAPE_UP:
+	{
+		color(11);
+		gameArea[tet->x - 2][tet->y] = gamePiece[1];
+		gameArea[tet->x][tet->y - 1] = gamePiece[2];
+		gameArea[tet->x + 2][tet->y] = gamePiece[3];
+		break;
+	}
+	case T_TSHAPE_RIGHT:
+	{
+		color(11);
+		gameArea[tet->x + 2][tet->y] = gamePiece[1];
+		gameArea[tet->x][tet->y - 1] = gamePiece[2];
+		gameArea[tet->x][tet->y + 1] = gamePiece[3];
+		break;
+	}
+	case T_ZSHAPE_LEFT:
+	{
+		color(14);
+		gameArea[tet->x - 2][tet->y] = gamePiece[1];
+		gameArea[tet->x][tet->y + 1] = gamePiece[2];
+		gameArea[tet->x + 2][tet->y + 1] = gamePiece[3];
+		break;
+	}
+	case T_ZSHAPE_UP:
+	{
+		color(14);
+		gameArea[tet->x][tet->y + 1] = gamePiece[1];
+		gameArea[tet->x + 2][tet->y] = gamePiece[2];
+		gameArea[tet->x + 2][tet->y - 1] = gamePiece[3];
+		break;
+	}
+	case T_ZINV_RIGHT:
+	{
+		color(15);
+		gameArea[tet->x + 2][tet->y] = gamePiece[1];
+		gameArea[tet->x][tet->y + 1] = gamePiece[2];
+		gameArea[tet->x - 2][tet->y + 1] = gamePiece[3];
+		break;
+	}
+	case T_ZINV_UP:
+	{
+		color(15);
+		gameArea[tet->x][tet->y - 1] = gamePiece[1];
+		gameArea[tet->x + 2][tet->y] = gamePiece[2];
+		gameArea[tet->x + 2][tet->y + 1] = gamePiece[3];
+		break;
+	}
+	case T_SEVEN_DOWN:
+	{
+		color(12);
+		gameArea[tet->x - 2][tet->y] = gamePiece[1];
+		gameArea[tet->x][tet->y + 1] = gamePiece[2];
+		gameArea[tet->x][tet->y + 2] = gamePiece[3];
+		break;
+	}
+	case T_SEVEN_LEFT:
+	{
+		color(12);
+		gameArea[tet->x][tet->y - 1] = gamePiece[1];
+		gameArea[tet->x - 2][tet->y] = gamePiece[2];
+		gameArea[tet->x - 4][tet->y] = gamePiece[3];
+		break;
+	}
+	case T_SEVEN_UP:
+	{
+		color(12);
+		gameArea[tet->x + 2][tet->y] = gamePiece[1];
+		gameArea[tet->x][tet->y - 1] = gamePiece[2];
+		gameArea[tet->x][tet->y - 2] = gamePiece[3];
+		break;
+	}
+	case T_SEVEN_RIGHT:
+	{
+		color(12);
+		gameArea[tet->x][tet->y + 1] = gamePiece[1];
+		gameArea[tet->x + 2][tet->y] = gamePiece[2];
+		gameArea[tet->x + 4][tet->y] = gamePiece[3];
+		break;
+	}
+	case T_SEVINV_DOWN:
+	{
+		color(13);
+		gameArea[tet->x + 2][tet->y] = gamePiece[1];
+		gameArea[tet->x][tet->y + 1] = gamePiece[2];
+		gameArea[tet->x][tet->y + 2] = gamePiece[3];
+		break;
+	}
+	case T_SEVINV_LEFT:
+	{
+		color(13);
+		gameArea[tet->x][tet->y + 1] = gamePiece[1];
+		gameArea[tet->x - 2][tet->y] = gamePiece[2];
+		gameArea[tet->x - 4][tet->y] = gamePiece[3];
+		break;
+	}
+	case T_SEVINV_UP:
+	{
+		color(13);
+		gameArea[tet->x - 2][tet->y] = gamePiece[1];
+		gameArea[tet->x][tet->y - 1] = gamePiece[2];
+		gameArea[tet->x][tet->y - 2] = gamePiece[3];
+		break;
+	}
+	case T_SEVINV_RIGHT:
+	{
+		color(13);
+		gameArea[tet->x][tet->y - 1] = gamePiece[1];
+		gameArea[tet->x + 2][tet->y] = gamePiece[2];
+		gameArea[tet->x + 4][tet->y] = gamePiece[3];
+		break;
+	}
+	default:
+		break;
+	}
+}
+
+void printTetris(struct Tetris* tet) {
+	int i, j;
+	for (i = 0; i < 4; i++) {
+		gamePiece[i] = 1;                 // four blocks in one piece are all valid
+	}
+	makeTetris(tet);
+
+	for (i = tet->x - 2; i <= tet->x + 4; i += 2) {                    // scan all pixels the blocks can appear
+		for (j = tet->y - 2; j <= tet->y + 1; j++) {
+			if ((gameArea[i][j] == FLAG_BLOCK) && (j > FRAME_Y)) {        // if a block exist in the pixel
+				gotoxy(i, j);
+				printf("■");
+			}
+		}
+	}
+
+	gotoxy(FRAME_X + 2 * FRAME_WIDTH + 3, FRAME_Y + 1);          // print the game level
+	color(4);
+	printf("level : ");
+	color(12);
+	printf("%d", tet->level);
+
+	gotoxy(FRAME_X + 2 * FRAME_WIDTH + 3, FRAME_Y + 3);          // print the game score
+	color(4);
+	printf("score : ");
+	color(12);
+	printf("%d", tet->score);
+
+	gotoxy(FRAME_X + 2 * FRAME_WIDTH + 3, FRAME_Y + 5);          // print the game speed
+	color(4);
+	printf("speed : ");
+	color(12);
+	printf("%d", tet->speed);
 }

@@ -2,14 +2,13 @@
 
 // global variable
 int tmp, tmp1, tmp2;
-int gameArea[80][80] = { 0 };
-int gamePiece[4];
+int gameArea[AREA_HEIGHT][AREA_WIDTH] = { 0 };
+int gamePiece[BLOCK_COUNT];
 
 void flag(struct Tetris *);
-void makeTetris(struct Tetris *);
-void printTetris(struct Tetris *);
+
 void cleanTetris(struct Tetris *);
-int ifMove(struct Tetris*);
+
 void delFullLine(struct Tetris*);
 void gamePlay(void);
 void regulation(void);
