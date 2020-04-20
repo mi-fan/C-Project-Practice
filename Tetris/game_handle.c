@@ -3,11 +3,12 @@
 extern int gameArea[AREA_HEIGHT][AREA_WIDTH];
 extern int gamePiece[BLOCK_COUNT];
 
+void makeTetris(struct Tetris* tet);
+
 // decide whether the specific basic type can move
+// SQUARE cannot rotate
 static int ifMovableSquare(struct Tetris* tet) {
-	if ((gameArea[tet->x][tet->y + 1] == 0)
-		&& (gameArea[tet->x + 2][tet->y] == 0)
-		&& (gameArea[tet->x + 2][tet->y + 1] == 0))
+	if ((gameArea[tet->x][tet->y + 1] == 0) && (gameArea[tet->x + 2][tet->y] == 0) && (gameArea[tet->x + 2][tet->y + 1] == 0))
 		return TRUE;
 	else
 		return FALSE;
@@ -29,7 +30,7 @@ static int ifMovableLine(struct Tetris* tet) {
 	}
 }
 
-//T-shape has 4 formations
+// T-shape has 4 formations
 static int ifMovableTShape(struct Tetris* tet) {
 	if (tet->flag == T_TSHAPE_DOWN) {
 		if ((gameArea[tet->x][tet->y + 1] == 0) && (gameArea[tet->x + 2][tet->y] == 0) && (gameArea[tet->x - 2][tet->y] == 0))
@@ -57,7 +58,7 @@ static int ifMovableTShape(struct Tetris* tet) {
 	}
 }
 
-//Z-shape has 2 formations
+// Z-shape has 2 formations
 static int ifMovableZShape(struct Tetris* tet) {
 	if (tet->flag == T_ZSHAPE_LEFT) {
 		if ((gameArea[tet->x][tet->y + 1] == 0) && (gameArea[tet->x + 2][tet->y + 1] == 0) && (gameArea[tet->x - 2][tet->y] == 0))
@@ -72,7 +73,7 @@ static int ifMovableZShape(struct Tetris* tet) {
 			return FALSE;
 	}
 }
-//Z-shape-inverted has 2 formations
+// Z-shape-inverted has 2 formations
 static int ifMovableZSInv(struct Tetris* tet) {
 	if (tet->flag == T_ZINV_RIGHT) {
 		if ((gameArea[tet->x][tet->y + 1] == 0) && (gameArea[tet->x - 2][tet->y + 1] == 0) && (gameArea[tet->x + 2][tet->y] == 0))
@@ -88,7 +89,7 @@ static int ifMovableZSInv(struct Tetris* tet) {
 	}
 }
 
-//7-shape has 4 formations
+// 7-shape has 4 formations
 static int ifMovableSeven(struct Tetris* tet) {
 	if (tet->flag == T_SEVEN_DOWN) {
 		if ((gameArea[tet->x - 2][tet->y] == 0) && (gameArea[tet->x][tet->y + 1] == 0) && (gameArea[tet->x][tet->y + 2] == 0))
@@ -116,7 +117,7 @@ static int ifMovableSeven(struct Tetris* tet) {
 	}
 }
 
-//7-shape-inverted has 4 formations
+// 7-shape-inverted has 4 formations
 static int ifMovableSevenInv(struct Tetris* tet) {
 	if (tet->flag == T_SEVINV_DOWN) {
 		if ((gameArea[tet->x + 2][tet->y] == 0) && (gameArea[tet->x][tet->y + 1] == 0) && (gameArea[tet->x][tet->y + 2] == 0))
@@ -192,4 +193,25 @@ int ifMovable(struct Tetris* tet) {
 	}
 
 	return ret;
+}
+
+// clean the print of falling Tetris piece
+void cleanTetris(struct Tetris* tet) {
+	int i, j;
+
+	for (i = 0; i < BLOCK_COUNT; i++) {
+		gamePiece[i] = FLAG_EMPTY;
+	}
+
+	makeTetris(tet);  // draw an blank area with empty gamePiece
+
+	for (i = tet->x - 4; i <= tet->x + 4; i+=2) {                       // search the surrounding area
+		for (j = tet->y - 2; j <= tet->y + 2; j++) {
+			if ((gameArea[i][j] == FLAG_EMPTY) && (j > FRAME_Y)) {      // if the pixel is empty and inside game area
+				gotoxy(i, j);
+				printf("  ");
+			}
+
+		}
+	}
 }
