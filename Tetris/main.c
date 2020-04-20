@@ -7,7 +7,6 @@ int gamePiece[BLOCK_COUNT];
 
 void flag(struct Tetris *);
 
-void cleanTetris(struct Tetris *);
 
 void delFullLine(struct Tetris*);
 void gamePlay(void);

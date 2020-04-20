@@ -1,8 +1,7 @@
 #include "screen_handle.h"
 
-/*
- * set print color
- */
+
+// set print color
 int color(int clr) {
 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), clr);
@@ -10,9 +9,7 @@ int color(int clr) {
 	return 0;
 }
 
-/*
- * set cursor position
- */
+// set cursor position
 void gotoxy(int x, int y) {
 
 	COORD pos;

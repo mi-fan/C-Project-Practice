@@ -3,9 +3,9 @@
 extern int gameArea[AREA_HEIGHT][AREA_WIDTH];
 extern int gamePiece[BLOCK_COUNT];
 
-/*
- * set the welcome title
- */
+
+// set the welcome title
+ 
 void title() {
 	color(15);
 	gotoxy(29, 3);
@@ -48,9 +48,7 @@ void title() {
 	printf("■■■■");
 }
 
-/*
- * menue frame
- */
+// menue frame
 void welcome() {
 	int res;
 	int k, l;
