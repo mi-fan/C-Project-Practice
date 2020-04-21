@@ -215,3 +215,45 @@ void cleanTetris(struct Tetris* tet) {
 		}
 	}
 }
+
+// decide whether a line is full, and delete the full lines
+// a line is full when pixels with same Y coordinate inside game area are all blocks
+void delFullLine(struct Tetris* tet) {
+	int i, j, k, l, delRows = 0;
+
+	for (j = FRAME_Y + FRAME_HEIGHT - 1; j > FRAME_Y; j--) {
+		k = 0;
+		for (i = FRAME_X + 2; i < FRAME_X + 2 * FRAME_WIDTH; i += 2) {
+			if (gameArea[i][j] == FLAG_BLOCK) {
+				k++;
+				if (k == FRAME_WIDTH - 2) {                                                // if line is full
+					for (k = FRAME_X + 2; k < FRAME_X + 2 * FRAME_WIDTH - 2; k += 2) {     // delete the blocks in line
+						gameArea[k][j] = FLAG_EMPTY;
+						gotoxy(k, j);
+						printf("  ");
+					}
+
+					for (k = j - 1; k > FRAME_Y; k--) {                // if there are valid blocks above the deledted line
+						for (l = FRAME_X + 2; l < FRAME_X + 2 * FRAME_WIDTH - 2; l += 2) {
+							if (gameArea[l][k] == FLAG_BLOCK) {
+								gameArea[l][k] = FLAG_EMPTY;       // set old pixel empty
+								gotoxy(l, k);
+								printf("  ");
+								gameArea[l][k - 1] = FLAG_BLOCK;   // set upper pixel valid
+								gotoxy(l, k - 1);
+								printf("¡ö");
+							}
+						}
+					}
+					j++;              // consider the new bottom line
+					delRows++;
+				}
+			}
+		}
+	}
+	tet->score += 100 * delRows;
+	if ((delRows > 0) && ((tet->score % 1000 == 0) || (tet->score / 1000 > tet->level - 1))) {
+		tet->speed -= 20;     // if get 1000 score, level up and reduce falling time-step by 20 ms
+		tet->level++;
+	}
+}
