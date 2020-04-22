@@ -5,6 +5,7 @@
 #include <conio.h>
 #include <time.h>
 #include "screen_handle.h"
+#include "display.h"
 
 // macro define
 #define FALSE (0)
@@ -23,6 +24,17 @@
 #define AREA_WIDTH     (80)
 // block counts in one Tetris piece
 #define BLOCK_COUNT    (4)
+// ASCII of input char
+#define KBS            (32)
+#define KES            (27)
+#define KUP            (72)
+#define KLT            (75)
+#define KRT            (77)
+#define KDW            (80)
+// game status
+#define NORMAL_GAME      (0)
+#define RESUME_GAME      (1)
+#define EXIT_GAME        (2)
 
 enum tetrisType {
 	T_SQUARE = 0,
@@ -43,7 +55,8 @@ enum tetrisType {
 	T_SEVINV_DOWN,
 	T_SEVINV_LEFT,
 	T_SEVINV_UP,
-	T_SEVINV_RIGHT
+	T_SEVINV_RIGHT,
+	T_TOTAL
 };
 
 // structure define

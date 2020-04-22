@@ -1,7 +1,7 @@
 ﻿#include "display.h"
 
-extern int gameArea[AREA_HEIGHT][AREA_WIDTH];
-extern int gamePiece[BLOCK_COUNT];
+extern int tTable[AREA_HEIGHT][AREA_WIDTH];
+extern int tPiece[BLOCK_COUNT];
 
 
 // set the welcome title
@@ -71,7 +71,7 @@ void welcome() {
 	gotoxy(25, 12);
 	printf("1. Begin");
 	gotoxy(40, 12);
-	printf("2. Keyboard Setting");
+	printf("2. Keyboard");
 	gotoxy(25, 17);
 	printf("3. Play Rule");
 	gotoxy(40, 17);
@@ -131,8 +131,8 @@ void drawGameFrame(void) {
 	color(14);
 	printf(" ESC : exit");       // explaination
 
-	gameArea[FRAME_X][FRAME_Y + FRAME_HEIGHT] = 2;
-	gameArea[FRAME_X + 2*FRAME_WIDTH - 2][FRAME_Y + FRAME_HEIGHT] = 2;
+	tTable[FRAME_X][FRAME_Y + FRAME_HEIGHT] = 2;
+	tTable[FRAME_X + 2*FRAME_WIDTH - 2][FRAME_Y + FRAME_HEIGHT] = 2;
 
 	for (i = 1; i < 2 * FRAME_WIDTH -1; i++) {                  // print the top line of game area
 		gotoxy(FRAME_X + i, FRAME_Y);
@@ -142,19 +142,19 @@ void drawGameFrame(void) {
 	for (i = 1; i < 2 * FRAME_WIDTH - 1; i++) {                                  // print the bottome line of game area
 		gotoxy(FRAME_X + i, FRAME_Y + FRAME_HEIGHT);
 		printf("=");
-		gameArea[FRAME_X + i][FRAME_Y + FRAME_HEIGHT] = FLAG_BOUNDRY;        // mark the bottom of game area, to keep pieces inside the boundry
+		tTable[FRAME_X + i][FRAME_Y + FRAME_HEIGHT] = FLAG_BOUNDRY;        // mark the bottom of game area, to keep pieces inside the boundry
 	}
 
 	for (i = 1; i < FRAME_HEIGHT; i++) {                                     // print the bottome line of game area
 		gotoxy(FRAME_X, FRAME_Y + i);
 		printf("‖");
-		gameArea[FRAME_X][FRAME_Y + i] = FLAG_BOUNDRY;                       // mark the left boundry of game area
+		tTable[FRAME_X][FRAME_Y + i] = FLAG_BOUNDRY;                       // mark the left boundry of game area
 	}
 
 	for (i = 1; i < FRAME_HEIGHT; i++) {                                     // print the left line of game area
 		gotoxy(FRAME_X + 2*FRAME_WIDTH - 2, FRAME_Y + i);
 		printf("‖");
-		gameArea[FRAME_X + 2 * FRAME_WIDTH - 2][FRAME_Y + i] = FLAG_BOUNDRY; // mark the right boundry of game area
+		tTable[FRAME_X + 2 * FRAME_WIDTH - 2][FRAME_Y + i] = FLAG_BOUNDRY; // mark the right boundry of game area
 	}
 }
 
@@ -163,159 +163,159 @@ void drawGameFrame(void) {
 // 19 placing pieces 
 // gamePiece[0] is central block of one game piece
 void makeTetris(struct Tetris* tet) {
-	gameArea[tet->x][tet->y] = gamePiece[0];       // set current piece central block coordinate to Tetris structure
+	tTable[tet->x][tet->y] = tPiece[0];       // set current piece central block coordinate to Tetris structure
 
 	switch (tet->flag) {
 	case T_SQUARE:
 	{
 		color(10);
-		gameArea[tet->x][tet->y - 1] = gamePiece[1];   //set the other 3 blocks to game area
-		gameArea[tet->x + 2][tet->y - 1] = gamePiece[2];
-		gameArea[tet->x + 2][tet->y] = gamePiece[3];
+		tTable[tet->x][tet->y - 1] = tPiece[1];   //set the other 3 blocks to game area
+		tTable[tet->x + 2][tet->y - 1] = tPiece[2];
+		tTable[tet->x + 2][tet->y] = tPiece[3];
 		break;
 	}
 	case T_LINE_HORIZ:
 	{
 		color(13);
-		gameArea[tet->x - 2][tet->y] = gamePiece[1];
-		gameArea[tet->x + 2][tet->y] = gamePiece[2];
-		gameArea[tet->x + 4][tet->y] = gamePiece[3];
+		tTable[tet->x - 2][tet->y] = tPiece[1];
+		tTable[tet->x + 2][tet->y] = tPiece[2];
+		tTable[tet->x + 4][tet->y] = tPiece[3];
 		break;
 	}
 	case T_LINE_VERT:
 	{
 		color(13);
-		gameArea[tet->x][tet->y - 1] = gamePiece[1];
-		gameArea[tet->x][tet->y + 1] = gamePiece[2];
-		gameArea[tet->x][tet->y + 2] = gamePiece[3];
+		tTable[tet->x][tet->y - 1] = tPiece[1];
+		tTable[tet->x][tet->y + 1] = tPiece[2];
+		tTable[tet->x][tet->y + 2] = tPiece[3];
 		break;
 	}
 	case T_TSHAPE_DOWN:
 	{
 		color(11);
-		gameArea[tet->x - 2][tet->y] = gamePiece[1];
-		gameArea[tet->x + 2][tet->y] = gamePiece[2];
-		gameArea[tet->x][tet->y + 1] = gamePiece[3];
+		tTable[tet->x - 2][tet->y] = tPiece[1];
+		tTable[tet->x + 2][tet->y] = tPiece[2];
+		tTable[tet->x][tet->y + 1] = tPiece[3];
 		break;
 	}
 	case T_TSHAPE_LEFT:
 	{
 		color(11);
-		gameArea[tet->x - 2][tet->y] = gamePiece[1];
-		gameArea[tet->x][tet->y - 1] = gamePiece[2];
-		gameArea[tet->x][tet->y + 1] = gamePiece[3];
+		tTable[tet->x - 2][tet->y] = tPiece[1];
+		tTable[tet->x][tet->y - 1] = tPiece[2];
+		tTable[tet->x][tet->y + 1] = tPiece[3];
 		break;
 	}
 	case T_TSHAPE_UP:
 	{
 		color(11);
-		gameArea[tet->x - 2][tet->y] = gamePiece[1];
-		gameArea[tet->x][tet->y - 1] = gamePiece[2];
-		gameArea[tet->x + 2][tet->y] = gamePiece[3];
+		tTable[tet->x - 2][tet->y] = tPiece[1];
+		tTable[tet->x][tet->y - 1] = tPiece[2];
+		tTable[tet->x + 2][tet->y] = tPiece[3];
 		break;
 	}
 	case T_TSHAPE_RIGHT:
 	{
 		color(11);
-		gameArea[tet->x + 2][tet->y] = gamePiece[1];
-		gameArea[tet->x][tet->y - 1] = gamePiece[2];
-		gameArea[tet->x][tet->y + 1] = gamePiece[3];
+		tTable[tet->x + 2][tet->y] = tPiece[1];
+		tTable[tet->x][tet->y - 1] = tPiece[2];
+		tTable[tet->x][tet->y + 1] = tPiece[3];
 		break;
 	}
 	case T_ZSHAPE_LEFT:
 	{
 		color(14);
-		gameArea[tet->x - 2][tet->y] = gamePiece[1];
-		gameArea[tet->x][tet->y + 1] = gamePiece[2];
-		gameArea[tet->x + 2][tet->y + 1] = gamePiece[3];
+		tTable[tet->x - 2][tet->y] = tPiece[1];
+		tTable[tet->x][tet->y + 1] = tPiece[2];
+		tTable[tet->x + 2][tet->y + 1] = tPiece[3];
 		break;
 	}
 	case T_ZSHAPE_UP:
 	{
 		color(14);
-		gameArea[tet->x][tet->y + 1] = gamePiece[1];
-		gameArea[tet->x + 2][tet->y] = gamePiece[2];
-		gameArea[tet->x + 2][tet->y - 1] = gamePiece[3];
+		tTable[tet->x][tet->y + 1] = tPiece[1];
+		tTable[tet->x + 2][tet->y] = tPiece[2];
+		tTable[tet->x + 2][tet->y - 1] = tPiece[3];
 		break;
 	}
 	case T_ZINV_RIGHT:
 	{
 		color(15);
-		gameArea[tet->x + 2][tet->y] = gamePiece[1];
-		gameArea[tet->x][tet->y + 1] = gamePiece[2];
-		gameArea[tet->x - 2][tet->y + 1] = gamePiece[3];
+		tTable[tet->x + 2][tet->y] = tPiece[1];
+		tTable[tet->x][tet->y + 1] = tPiece[2];
+		tTable[tet->x - 2][tet->y + 1] = tPiece[3];
 		break;
 	}
 	case T_ZINV_UP:
 	{
 		color(15);
-		gameArea[tet->x][tet->y - 1] = gamePiece[1];
-		gameArea[tet->x + 2][tet->y] = gamePiece[2];
-		gameArea[tet->x + 2][tet->y + 1] = gamePiece[3];
+		tTable[tet->x][tet->y - 1] = tPiece[1];
+		tTable[tet->x + 2][tet->y] = tPiece[2];
+		tTable[tet->x + 2][tet->y + 1] = tPiece[3];
 		break;
 	}
 	case T_SEVEN_DOWN:
 	{
 		color(12);
-		gameArea[tet->x - 2][tet->y] = gamePiece[1];
-		gameArea[tet->x][tet->y + 1] = gamePiece[2];
-		gameArea[tet->x][tet->y + 2] = gamePiece[3];
+		tTable[tet->x - 2][tet->y] = tPiece[1];
+		tTable[tet->x][tet->y + 1] = tPiece[2];
+		tTable[tet->x][tet->y + 2] = tPiece[3];
 		break;
 	}
 	case T_SEVEN_LEFT:
 	{
 		color(12);
-		gameArea[tet->x][tet->y - 1] = gamePiece[1];
-		gameArea[tet->x - 2][tet->y] = gamePiece[2];
-		gameArea[tet->x - 4][tet->y] = gamePiece[3];
+		tTable[tet->x][tet->y - 1] = tPiece[1];
+		tTable[tet->x - 2][tet->y] = tPiece[2];
+		tTable[tet->x - 4][tet->y] = tPiece[3];
 		break;
 	}
 	case T_SEVEN_UP:
 	{
 		color(12);
-		gameArea[tet->x + 2][tet->y] = gamePiece[1];
-		gameArea[tet->x][tet->y - 1] = gamePiece[2];
-		gameArea[tet->x][tet->y - 2] = gamePiece[3];
+		tTable[tet->x + 2][tet->y] = tPiece[1];
+		tTable[tet->x][tet->y - 1] = tPiece[2];
+		tTable[tet->x][tet->y - 2] = tPiece[3];
 		break;
 	}
 	case T_SEVEN_RIGHT:
 	{
 		color(12);
-		gameArea[tet->x][tet->y + 1] = gamePiece[1];
-		gameArea[tet->x + 2][tet->y] = gamePiece[2];
-		gameArea[tet->x + 4][tet->y] = gamePiece[3];
+		tTable[tet->x][tet->y + 1] = tPiece[1];
+		tTable[tet->x + 2][tet->y] = tPiece[2];
+		tTable[tet->x + 4][tet->y] = tPiece[3];
 		break;
 	}
 	case T_SEVINV_DOWN:
 	{
 		color(13);
-		gameArea[tet->x + 2][tet->y] = gamePiece[1];
-		gameArea[tet->x][tet->y + 1] = gamePiece[2];
-		gameArea[tet->x][tet->y + 2] = gamePiece[3];
+		tTable[tet->x + 2][tet->y] = tPiece[1];
+		tTable[tet->x][tet->y + 1] = tPiece[2];
+		tTable[tet->x][tet->y + 2] = tPiece[3];
 		break;
 	}
 	case T_SEVINV_LEFT:
 	{
 		color(13);
-		gameArea[tet->x][tet->y + 1] = gamePiece[1];
-		gameArea[tet->x - 2][tet->y] = gamePiece[2];
-		gameArea[tet->x - 4][tet->y] = gamePiece[3];
+		tTable[tet->x][tet->y + 1] = tPiece[1];
+		tTable[tet->x - 2][tet->y] = tPiece[2];
+		tTable[tet->x - 4][tet->y] = tPiece[3];
 		break;
 	}
 	case T_SEVINV_UP:
 	{
 		color(13);
-		gameArea[tet->x - 2][tet->y] = gamePiece[1];
-		gameArea[tet->x][tet->y - 1] = gamePiece[2];
-		gameArea[tet->x][tet->y - 2] = gamePiece[3];
+		tTable[tet->x - 2][tet->y] = tPiece[1];
+		tTable[tet->x][tet->y - 1] = tPiece[2];
+		tTable[tet->x][tet->y - 2] = tPiece[3];
 		break;
 	}
 	case T_SEVINV_RIGHT:
 	{
 		color(13);
-		gameArea[tet->x][tet->y - 1] = gamePiece[1];
-		gameArea[tet->x + 2][tet->y] = gamePiece[2];
-		gameArea[tet->x + 4][tet->y] = gamePiece[3];
+		tTable[tet->x][tet->y - 1] = tPiece[1];
+		tTable[tet->x + 2][tet->y] = tPiece[2];
+		tTable[tet->x + 4][tet->y] = tPiece[3];
 		break;
 	}
 	default:
@@ -326,13 +326,13 @@ void makeTetris(struct Tetris* tet) {
 void printTetris(struct Tetris* tet) {
 	int i, j;
 	for (i = 0; i < 4; i++) {
-		gamePiece[i] = 1;                 // four blocks in one piece are all valid
+		tPiece[i] = 1;                 // four blocks in one piece are all valid
 	}
 	makeTetris(tet);
 
 	for (i = tet->x - 2; i <= tet->x + 4; i += 2) {                    // scan all pixels the blocks can appear
 		for (j = tet->y - 2; j <= tet->y + 1; j++) {
-			if ((gameArea[i][j] == FLAG_BLOCK) && (j > FRAME_Y)) {        // if a block exist in the pixel
+			if ((tTable[i][j] == FLAG_BLOCK) && (j > FRAME_Y)) {        // if a block exist in the pixel
 				gotoxy(i, j);
 				printf("■");
 			}
