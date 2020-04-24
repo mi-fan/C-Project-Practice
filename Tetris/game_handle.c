@@ -269,8 +269,8 @@ void genRandTetris(struct Tetris* tet) {
 }
 
 // play the game
-void playGame(void) {
-	int n, state, tmpx, tmpf;
+int playGame(void) {
+	int chs, state, tmpx, tmpf;
 	UINT32 pauseTime;
 	char ch;
 	struct Tetris tet, tNext;
@@ -398,7 +398,7 @@ void playGame(void) {
 					continue;
 				}
 				else if (EXIT_GAME == state) {
-					return;                          // return main loop must enter welcome window
+					break;                            
 				}
 
 				if (FALSE == ifMovable(pTet)) {      // if cannot move to new position, reset the piece
@@ -413,7 +413,51 @@ void playGame(void) {
 				delFullLine(pTet);
 				break;
 			}
-		}
+		}// end of while get one kbhit
 	
-	}
+		if (EXIT_GAME == state) 
+			break;
+		else 
+			state = NORMAL_GAME;
+		
+		// check if last piece touches the top of table
+		if ((FRAME_Y >= pTet->y - 2) && (FRAME_Y <= pTet->y + 2)) {
+			system("cls");
+
+			gotoxy(29, 7);
+			printf("   \n");
+			color(12);
+			printf("\t\t\t¡ö¡ö¡ö¡ö      ¡ö      ¡ö      ¡ö¡ö      \n");
+			printf("\t\t\t¡ö            ¡ö¡ö    ¡ö      ¡ö   ¡ö   \n");
+			printf("\t\t\t¡ö¡ö¡ö¡ö      ¡ö  ¡ö  ¡ö      ¡ö    ¡ö  \n");
+			printf("\t\t\t¡ö            ¡ö    ¡ö¡ö      ¡ö   ¡ö   \n");
+			printf("\t\t\t¡ö¡ö¡ö¡ö      ¡ö      ¡ö      ¡ö¡ö      \n");
+
+			gotoxy(17, 18);
+			color(14);
+			printf("[1] play again");
+			gotoxy(44, 18);
+			printf("[2] exit game");
+
+			gotoxy(32, 20);
+			printf("choose[1 or 2]:");
+			color(11);
+			scanf_s("%d", &chs);
+			if (2 == chs) {
+				state = EXIT_GAME;
+			}
+			else {
+				system("cls");
+				state = REPLAY_GAME;
+			}
+		} /// end of check gameover
+
+		if (NORMAL_GAME != state) {
+			break;
+		}
+
+		cleanTetris(pNext);      //clean the NEXT window graph
+	}/// end of game loop
+
+	return state;
 }

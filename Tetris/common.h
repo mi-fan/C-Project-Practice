@@ -35,6 +35,7 @@
 #define NORMAL_GAME      (0)
 #define RESUME_GAME      (1)
 #define EXIT_GAME        (2)
+#define REPLAY_GAME      (3)
 
 enum tetrisType {
 	T_SQUARE = 0,
