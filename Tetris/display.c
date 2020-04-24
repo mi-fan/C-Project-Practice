@@ -6,7 +6,10 @@ extern int tPiece[BLOCK_COUNT];
 
 // set the welcome title
  
-void title() {
+void title(int mode) {
+	if (REPLAY_GAME == mode)
+		return;
+
 	color(15);
 	gotoxy(29, 3);
 	printf(" My Tetris Game\n");
@@ -49,53 +52,62 @@ void title() {
 }
 
 // menue frame
-void welcome() {
-	int res;
+int welcome(int mode) {
+	int chs, ret;
 	int k, l;
 
-	// the menu frame
-	color(14);
+	ret = NORMAL_GAME;
 
-	for (k = 9; k <= 20; k++) {
-		for (l = 15; l <= 60; l++) {
-			gotoxy(l, k);
-			if ((k == 9) || (k == 20))
-				printf("=");
-			else if ((l == 15) || (l == 59))
-				printf("||");
+	if (REPLAY_GAME != mode) {
+		// the menu frame
+		color(14);
+
+		for (k = 9; k <= 20; k++) {
+			for (l = 15; l <= 60; l++) {
+				gotoxy(l, k);
+				if ((k == 9) || (k == 20))
+					printf("=");
+				else if ((l == 15) || (l == 59))
+					printf("||");
+			}
 		}
+
+		// menu context
+		color(12);
+		gotoxy(25, 12);
+		printf("1. Begin");
+		gotoxy(40, 12);
+		printf("2. Keyboard");
+		gotoxy(25, 17);
+		printf("3. Play Rule");
+		gotoxy(40, 17);
+		printf("4. Exit");
+
+		color(3);
+		gotoxy(21, 22);
+		printf("Choose[1 2 3 4]:[ ]\b\b");
+
+		color(14);
+		scanf_s("%d", &chs);
 	}
-
-	// menu context
-	color(12);
-	gotoxy(25, 12);
-	printf("1. Begin");
-	gotoxy(40, 12);
-	printf("2. Keyboard");
-	gotoxy(25, 17);
-	printf("3. Play Rule");
-	gotoxy(40, 17);
-	printf("4. Exit");
-
-	color(3);
-	gotoxy(21, 22);
-	printf("Choose[1 2 3 4]:[ ]\b\b");
-
-	color(14);
-	scanf_s("%d", &res);
-
-	switch (res) {
+	else {
+		chs = 1;
+	}
+	
+	switch (chs) {
 	case 1:
 		system("cls");
 		drawGameFrame();     //show the game window
+		ret = playGame();
 		break;
 	case 2:
 	case 3:
 	case 4:
 	default:
 		break;
-
 	}
+
+	return ret;
 }
 
 void drawGameFrame(void) {

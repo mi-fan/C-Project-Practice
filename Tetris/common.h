@@ -6,6 +6,7 @@
 #include <time.h>
 #include "screen_handle.h"
 #include "display.h"
+#include "game_handle.h"
 
 // macro define
 #define FALSE (0)

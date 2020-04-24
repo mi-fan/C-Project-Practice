@@ -6,9 +6,14 @@ int tTable[AREA_HEIGHT][AREA_WIDTH] = { 0 };
 int tPiece[BLOCK_COUNT];
 
 int main(void) {
-	title();
+	int mode;
 
-	welcome();
-	
+	mode = NORMAL_GAME;
+
+	while (1) {
+		title(mode);
+		mode = welcome(mode);
+	}
+
 	return 0;
 }
