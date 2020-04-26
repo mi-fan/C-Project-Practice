@@ -9,8 +9,6 @@
 #include "game_handle.h"
 
 // macro define
-#define FALSE (0)
-#define TRUE  (1)
 // display
 #define FRAME_X        (13)
 #define FRAME_Y        (3)

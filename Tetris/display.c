@@ -101,6 +101,8 @@ int welcome(int mode) {
 		ret = playGame();
 		break;
 	case 2:
+		instruction();
+		break;
 	case 3:
 	case 4:
 	default:
@@ -368,4 +370,48 @@ void printTetris(struct Tetris* tet) {
 	printf("speed : ");
 	color(12);
 	printf("%d", tet->speed);
+}
+
+// keyboard instruction
+void instruction(void) {
+	int i, j;
+	
+	system("cls");
+
+	color(13);
+	gotoxy(32, 3);
+	printf("keyboard instruction");
+
+	color(2);
+	for (i = 6; i <= 16; i++) {
+		for (j = 15; j <= 60; j++) {
+			gotoxy(j, i);
+			if (i == 6 || i == 16)
+				printf("=");
+			else if (j == 16 || j == 59)
+				printf("||");
+		}
+	}
+
+	color(3);
+	gotoxy(18, 7);
+	printf("**** press  ← →  to move");
+	color(10);
+	gotoxy(18, 9);
+	printf("**** press ↑ to rotate");
+	color(14);
+	gotoxy(18, 11);
+	printf("**** press ↓ to move faster");
+	color(11);
+	gotoxy(18, 13);
+	printf("**** press SPACE to pause");
+	color(4);
+	gotoxy(18, 15);
+	printf("**** press ESC to exit");
+	color(8);
+	gotoxy(18, 19);
+	printf("press anykey to return");
+	_getch();
+	system("cls");
+	return;
 }

@@ -261,7 +261,7 @@ void delFullLine(struct Tetris* pTet) {
 // Generate random tetris pieces
 void genRandTetris(struct Tetris* tet) {
 	tet->number++;
-	srand(time(NULL));
+	srand((UINT)time(NULL));
 	if (tet->number == 1) {
 		tet->flag = rand() % T_TOTAL;     // init the first piece 
 	}
