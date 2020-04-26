@@ -3,9 +3,29 @@
 extern int tTable[AREA_HEIGHT][AREA_WIDTH];
 extern int tPiece[BLOCK_COUNT];
 
+// selection handle
+// jump to corresponding game module
+int selection(char ch) {
+	int ret = NORMAL_GAME;
+	switch (ch) {
+	case 1:
+		system("cls");
+		drawGameFrame();     //show the game window
+		ret = playGame();
+		break;
+	case 2:
+		instruction();
+		break;
+	case 3:
+	case 4:
+	default:
+		break;
+	}
 
-// set the welcome title
- 
+	return ret;
+}
+
+// set the welcome title 
 void title(int mode) {
 	if (REPLAY_GAME == mode)
 		return;
@@ -94,20 +114,7 @@ int welcome(int mode) {
 		chs = 1;
 	}
 	
-	switch (chs) {
-	case 1:
-		system("cls");
-		drawGameFrame();     //show the game window
-		ret = playGame();
-		break;
-	case 2:
-		instruction();
-		break;
-	case 3:
-	case 4:
-	default:
-		break;
-	}
+	ret = selection(chs);
 
 	return ret;
 }
