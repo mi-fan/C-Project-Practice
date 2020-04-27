@@ -461,3 +461,7 @@ int playGame(void) {
 
 	return state;
 }
+
+void closeGame(void) {
+	exit(0);
+}

@@ -20,6 +20,8 @@ int selection(char ch) {
 		gameRule();
 		break;
 	case 4:
+		closeGame();
+		break;
 	default:
 		break;
 	}
