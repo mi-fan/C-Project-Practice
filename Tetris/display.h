@@ -7,3 +7,4 @@ void drawGameFrame(void);
 void makeTetris(struct Tetris* tet);
 void printTetris(struct Tetris* tet);
 void instruction(void);
+void gameRule(void);

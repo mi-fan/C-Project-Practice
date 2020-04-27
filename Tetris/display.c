@@ -17,6 +17,8 @@ int selection(char ch) {
 		instruction();
 		break;
 	case 3:
+		gameRule();
+		break;
 	case 4:
 	default:
 		break;
@@ -99,7 +101,7 @@ int welcome(int mode) {
 		gotoxy(40, 12);
 		printf("2. Keyboard");
 		gotoxy(25, 17);
-		printf("3. Play Rule");
+		printf("3. Game Rule");
 		gotoxy(40, 17);
 		printf("4. Exit");
 
@@ -417,7 +419,45 @@ void instruction(void) {
 	printf("**** press ESC to exit");
 	color(8);
 	gotoxy(18, 19);
-	printf("press anykey to return");
+	printf("press anykey to continue...");
+	_getch();
+	system("cls");
+	return;
+}
+
+// game rule
+void gameRule(void) {
+	int i, j;
+
+	system("cls");
+
+	color(13);
+	gotoxy(34, 3);
+	printf("Game Rule");
+
+	color(2);
+	for (i = 6; i <= 16; i++) {
+		for (j = 12; j <= 70; j++) {
+			gotoxy(j, i);
+			if (i == 6 || i == 16)
+				printf("=");
+			else if (j == 12 || j == 69)
+				printf("||");
+		}
+	}
+
+	color(12);
+	gotoxy(18, 9);
+	printf("####   Clear one line get 100 pts");
+	color(14);
+	gotoxy(18, 11);
+	printf("####   Get 1000 pts will level up");
+	color(11);
+	gotoxy(18, 13);
+	printf("####   Level up will speed up");
+	color(8);
+	gotoxy(18, 17);
+	printf("press anykey to continue...");
 	_getch();
 	system("cls");
 	return;
