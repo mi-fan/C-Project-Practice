@@ -355,8 +355,8 @@ void printTetris(struct Tetris* tet) {
 	}
 	makeTetris(tet);
 
-	for (i = tet->x - 2; i <= tet->x + 4; i += 2) {                    // scan all pixels the blocks can appear
-		for (j = tet->y - 2; j <= tet->y + 1; j++) {
+	for (i = tet->x - 4; i <= tet->x + 4; i += 2) {                    // scan all pixels the blocks can appear
+		for (j = tet->y - 4; j <= tet->y + 4; j++) {
 			if ((tTable[i][j] == FLAG_BLOCK) && (j > FRAME_Y)) {        // if a block exist in the pixel
 				gotoxy(i, j);
 				printf("■");
