@@ -287,6 +287,7 @@ int playGame(void) {
 
 	// main loop of game
 	while (1) {
+		flushGameTable();
 		genRandTetris(pTet);                          // generate new piece
 		memcpy((INT8*)pNext, (INT8*)pTet, sizeof(struct Tetris));
 
@@ -445,6 +446,7 @@ int playGame(void) {
 			color(11);
 			scanf_s("%d", &chs);
 			if (2 == chs) {
+				system("cls");
 				state = EXIT_GAME;
 			}
 			else {

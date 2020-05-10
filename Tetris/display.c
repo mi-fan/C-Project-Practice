@@ -156,8 +156,8 @@ void drawGameFrame(void) {
 	color(14);
 	printf(" ESC : exit");       // explaination
 
-	tTable[FRAME_X][FRAME_Y + FRAME_HEIGHT] = 2;
-	tTable[FRAME_X + 2*FRAME_WIDTH - 2][FRAME_Y + FRAME_HEIGHT] = 2;
+	tTable[FRAME_X][FRAME_Y + FRAME_HEIGHT] = FLAG_BOUNDARY;
+	tTable[FRAME_X + 2*FRAME_WIDTH - 2][FRAME_Y + FRAME_HEIGHT] = FLAG_BOUNDARY;
 
 	for (i = 1; i < 2 * FRAME_WIDTH -1; i++) {                  // print the top line of game area
 		gotoxy(FRAME_X + i, FRAME_Y);
@@ -167,19 +167,19 @@ void drawGameFrame(void) {
 	for (i = 1; i < 2 * FRAME_WIDTH - 1; i++) {                                  // print the bottome line of game area
 		gotoxy(FRAME_X + i, FRAME_Y + FRAME_HEIGHT);
 		printf("=");
-		tTable[FRAME_X + i][FRAME_Y + FRAME_HEIGHT] = FLAG_BOUNDRY;        // mark the bottom of game area, to keep pieces inside the boundry
+		tTable[FRAME_X + i][FRAME_Y + FRAME_HEIGHT] = FLAG_BOUNDARY;        // mark the bottom of game area, to keep pieces inside the boundry
 	}
 
 	for (i = 1; i < FRAME_HEIGHT; i++) {                                     // print the bottome line of game area
 		gotoxy(FRAME_X, FRAME_Y + i);
 		printf("‖");
-		tTable[FRAME_X][FRAME_Y + i] = FLAG_BOUNDRY;                       // mark the left boundry of game area
+		tTable[FRAME_X][FRAME_Y + i] = FLAG_BOUNDARY;                       // mark the left boundry of game area
 	}
 
 	for (i = 1; i < FRAME_HEIGHT; i++) {                                     // print the left line of game area
 		gotoxy(FRAME_X + 2*FRAME_WIDTH - 2, FRAME_Y + i);
 		printf("‖");
-		tTable[FRAME_X + 2 * FRAME_WIDTH - 2][FRAME_Y + i] = FLAG_BOUNDRY; // mark the right boundry of game area
+		tTable[FRAME_X + 2 * FRAME_WIDTH - 2][FRAME_Y + i] = FLAG_BOUNDARY; // mark the right boundry of game area
 	}
 }
 
@@ -351,7 +351,7 @@ void makeTetris(struct Tetris* tet) {
 void printTetris(struct Tetris* tet) {
 	int i, j;
 	for (i = 0; i < 4; i++) {
-		tPiece[i] = 1;                 // four blocks in one piece are all valid
+		tPiece[i] = FLAG_BLOCK;                        // four blocks in one piece are all valid
 	}
 	makeTetris(tet);
 
@@ -463,4 +463,15 @@ void gameRule(void) {
 	_getch();
 	system("cls");
 	return;
+}
+
+void flushGameTable(void) {
+	int i, j;
+
+	for (i = 1; i < FRAME_X + 2 * FRAME_WIDTH - 1; i++) {
+		for (j = 1; j < FRAME_Y + FRAME_HEIGHT; j++) {
+			if (tTable[i][j] == FLAG_BLOCK)
+				tTable[i][j] = FLAG_OCCUPY;
+		}
+	}
 }

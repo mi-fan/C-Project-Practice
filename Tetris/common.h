@@ -15,9 +15,10 @@
 #define FRAME_HEIGHT   (20)
 #define FRAME_WIDTH    (18)
 // game area flag
-#define FLAG_BOUNDRY   (2)
-#define FLAG_BLOCK     (1)
-#define FLAG_EMPTY     (0)
+#define FLAG_BOUNDARY  (3)      // boundary of game table
+#define FLAG_OCCUPY    (2)      // pixel is occupied by old tetris
+#define FLAG_BLOCK     (1)      // pixel is used by current tetris
+#define FLAG_EMPTY     (0)      // pixel is empty
 // game area pixel
 #define AREA_HEIGHT    (80)
 #define AREA_WIDTH     (80)
