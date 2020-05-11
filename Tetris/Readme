@@ -1,0 +1,5 @@
+Use the winapi to control the screen output char and colors
+
+V0.9 Basic function is completed. Some issues need to be solved in next version:
+1. Clear the input buffer zone before get keyboard hit, make the operation more instantly
+2. Enable multi keyboard hits per down step of the piece
