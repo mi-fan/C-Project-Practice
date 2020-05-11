@@ -1,3 +1,5 @@
 #pragma once
 #include "common.h"
-#include "..\Tetris\screen_handle.h"  
+
+int color(int clr);
+void gotoxy(int x, int y);
