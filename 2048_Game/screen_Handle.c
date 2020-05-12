@@ -1,7 +1,7 @@
 #include "screen_Handle.h"
 
 //**************************************
-// set the character color
+// Set the character color
 //**************************************
 int color(int clr) {
 
@@ -11,7 +11,7 @@ int color(int clr) {
 }
 
 //**************************************
-// set cursor position
+// Set cursor position
 //**************************************
 void gotoxy(int x, int y) {
 
@@ -24,9 +24,9 @@ void gotoxy(int x, int y) {
 }
 
 //**************************************
-// Print the game logo "2048"
+// Draw the game logo "2048"
 //**************************************
-void title(void) {
+void draw_Title(void) {
 	color(11);
 	gotoxy(17, 2);
 	printf("¡ö¡ö¡ö     ¡ö¡ö¡ö¡ö     ¡ö  ¡ö     ¡ö¡ö¡ö¡ö");
@@ -38,15 +38,15 @@ void title(void) {
 	printf("¡ö         ¡ö    ¡ö     ¡ö¡ö¡ö     ¡ö    ¡ö");
 	gotoxy(17, 6);
 	printf("¡ö¡ö¡ö     ¡ö¡ö¡ö¡ö         ¡ö     ¡ö¡ö¡ö¡ö");
+
+
 }
 
 //**************************************
-// Show the menu with game options
+// Draw the menu table with game options
 //**************************************
-void menu(void) {
-	int choice = 0;
+void draw_Menu(void) {
 	int i, j;
-	gameStatus_t status;
 
 	// print the frame
 	color(14);
@@ -72,17 +72,28 @@ void menu(void) {
 	printf("3. Instruction");
 	gotoxy(42, 16);
 	printf("4. Exit");
+}
 
+//**************************************
+// Show the menu with game options
+//**************************************
+void menu(void) {
+	int choice = 0;
+	gameStatus_t status;
+
+	// draw the menu with frame
+	draw_Menu();
+	
 	// keyboard input
 	gotoxy(21, 22);
 	color(5);
 	printf("Your choice is ... ");
 
+	// run game branch
 	while (TRUE)
 	{
 		scanf_s("%d", &choice);
 
-		// run the game branch
 		status = game_main(choice);
 
 		// handle the invalid choice
@@ -95,4 +106,61 @@ void menu(void) {
 			break;
 		}
 	}
+}
+//**************************************
+// Draw the game area grids
+//**************************************
+void draw_GameTable(void) {
+	int i, j, k;
+	
+	color(14);
+
+	// draw the horizon lines
+	for (j = 2; j <= 22; j += 5) {
+		gotoxy(15, j);
+		for (k = 1; k < 42; k++) {
+			printf("-");
+		}
+		printf("\n");
+	}
+
+	// draw five vertical lines
+	for (i = 3; i < 7; i++) {
+		gotoxy(15, i);
+		printf("|        |        |        |        |");
+	}
+
+	for (i = 8; i < 12; i++) {
+		gotoxy(15, i);
+		printf("|        |        |        |        |");
+	}
+
+	for (i = 13; i < 17; i++) {
+		gotoxy(15, i);
+		printf("|        |        |        |        |");
+	}
+
+	for (i = 18; i < 22; i++) {
+		gotoxy(15, i);
+		printf("|        |        |        |        |");
+	}
+}
+
+//**************************************
+// Print the game info
+//**************************************
+void draw_GameInfo(void) {
+	extern gameInfo_t g_gameInfo;
+
+	color(11);
+	gotoxy(16, 1);
+	printf("Score: %ld", g_gameInfo.score);
+
+	color(13);
+	gotoxy(42, 1);
+	printf("Steps: %ld", g_gameInfo.step);
+
+	color(10);
+	gotoxy(44, 23);
+	printf("Time: %ld", g_gameInfo.time);
 }

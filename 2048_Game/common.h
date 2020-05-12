@@ -21,3 +21,10 @@ typedef enum __gameStatus_t
 	GS_NORM,
 	GS_INVALID,
 }gameStatus_t;
+
+typedef struct __gameInfo_t
+{
+	int score;
+	int step;
+	int time;
+}gameInfo_t;

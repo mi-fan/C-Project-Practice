@@ -3,5 +3,6 @@
 
 int color(int clr);
 void gotoxy(int x, int y);
-void title(void);
+void draw_Title(void);
 void menu(void);
+void draw_GameTable(void);

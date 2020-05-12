@@ -1,11 +1,12 @@
 #include "common.h"
 
 int game_main(int choice) {
-	gameStatus_t status;
+	gameStatus_t status = GS_NORM;
 
 	switch (choice)
 	{
 	case CHC_BEGIN:
+		draw_GameTable();
 		break;
 	case CHC_RULE:
 		break;
