@@ -7,11 +7,17 @@
 #include "game_handle.h"
 #include "screen_Handle.h"
 
-enum gameChoice
+typedef enum __gameChoice_t
 {
-	GAME_BEGIN = 1,
-	GAME_RULE,
-	GAME_INSTRUCT,
-	GAME_EXIT,
-	GAME_INVALID
-};
+	CHC_BEGIN = 1,
+	CHC_RULE,
+	CHC_INSTRUCT,
+	CHC_EXIT,
+	CHC_INVALID,
+}gameChoice_t;
+
+typedef enum __gameStatus_t
+{
+	GS_NORM,
+	GS_INVALID,
+}gameStatus_t;

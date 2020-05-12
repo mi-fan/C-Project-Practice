@@ -1,17 +1,27 @@
 #include "common.h"
 
-void game_main(int choice) {
+int game_main(int choice) {
+	gameStatus_t status;
+
 	switch (choice)
 	{
-	case GAME_BEGIN:
+	case CHC_BEGIN:
 		break;
-	case GAME_RULE:
+	case CHC_RULE:
 		break;
-	case GAME_INSTRUCT:
+	case CHC_INSTRUCT:
 		break;
-	case GAME_EXIT:
+	case CHC_EXIT:
+		exit(0);
 		break;
 	default:
+		status = GS_INVALID;
 		break;
 	}
+
+	if (GS_INVALID == status) {
+		return status;
+	}
+
+
 }
