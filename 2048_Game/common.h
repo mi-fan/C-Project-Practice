@@ -7,6 +7,9 @@
 #include "game_handle.h"
 #include "screen_Handle.h"
 
+#define NUM_COUNT (11)    // total 11 valid game number
+#define LEN       (4)     // game table width and height
+
 typedef enum __gameChoice_t
 {
 	CHC_BEGIN = 1,
@@ -21,6 +24,26 @@ typedef enum __gameStatus_t
 	GS_NORM,
 	GS_INVALID,
 }gameStatus_t;
+
+typedef enum __color_t
+{
+	BLACK,
+	BLUE_DEEP,
+	GREEN_DEEP,
+	BL_GR_DEEP,
+	RED_DEEP,
+	PURPLE,
+	YELLOW_DARK,
+	WHITE,
+	GRAY,
+	BLUE_LIGHT,
+	GREEN_LIGTH,
+	BL_GR_LIGHT,
+	RED,
+	PINK,
+	YELLOW,
+	WHITE_LIGHT
+}color_t;
 
 typedef struct __gameInfo_t
 {

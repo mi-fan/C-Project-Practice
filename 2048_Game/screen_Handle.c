@@ -1,5 +1,8 @@
 #include "screen_Handle.h"
 
+const num_color[NUM_COUNT] = { WHITE, BLUE_LIGHT, GREEN_LIGTH, BL_GR_LIGHT, PINK, YELLOW,
+								GRAY, PURPLE, BLUE_DEEP, GREEN_DEEP, RED };
+
 //**************************************
 // Set the character color
 //**************************************
@@ -27,7 +30,7 @@ void gotoxy(int x, int y) {
 // Draw the game logo "2048"
 //**************************************
 void draw_Title(void) {
-	color(11);
+	color(BL_GR_LIGHT);
 	gotoxy(17, 2);
 	printf("¡ö¡ö¡ö     ¡ö¡ö¡ö¡ö     ¡ö  ¡ö     ¡ö¡ö¡ö¡ö");
 	gotoxy(17, 3);
@@ -49,7 +52,7 @@ void draw_Menu(void) {
 	int i, j;
 
 	// print the frame
-	color(14);
+	color(YELLOW);
 	for (i = 9; i <= 20; i++) {
 		for (j = 15; j <= 60; j++) {
 			gotoxy(j, i);
@@ -63,7 +66,7 @@ void draw_Menu(void) {
 	}
 
 	// display the valid choices
-	color(12);
+	color(PINK);
 	gotoxy(22, 12);
 	printf("1. Begin");
 	gotoxy(42, 12);
@@ -86,7 +89,7 @@ void menu(void) {
 	
 	// keyboard input
 	gotoxy(21, 22);
-	color(5);
+	color(PURPLE);
 	printf("Your choice is ... ");
 
 	// run game branch
@@ -99,7 +102,7 @@ void menu(void) {
 		// handle the invalid choice
 		if (GS_INVALID == status) {
 			gotoxy(21, 23);
-			color(12);
+			color(RED);
 			printf("Input a integer of 1, 2, 3, 4 ...  \b");
 		}
 		else{
@@ -113,7 +116,7 @@ void menu(void) {
 void draw_GameTable(void) {
 	int i, j, k;
 	
-	color(14);
+	color(YELLOW);
 
 	// draw the horizon lines
 	for (j = 2; j <= 22; j += 5) {
@@ -152,15 +155,22 @@ void draw_GameTable(void) {
 void draw_GameInfo(void) {
 	extern gameInfo_t g_gameInfo;
 
-	color(11);
+	color(BL_GR_LIGHT);
 	gotoxy(16, 1);
 	printf("Score: %ld", g_gameInfo.score);
 
-	color(13);
+	color(PINK);
 	gotoxy(42, 1);
 	printf("Steps: %ld", g_gameInfo.step);
 
-	color(10);
+	color(GREEN_LIGTH);
 	gotoxy(44, 23);
 	printf("Time: %ld", g_gameInfo.time);
+}
+
+//**************************************
+// Set number colors
+//**************************************
+void set_NumColor(color_t col) {
+	color(num_color[NUM_COUNT]);
 }
