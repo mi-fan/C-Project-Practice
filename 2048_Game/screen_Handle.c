@@ -153,19 +153,19 @@ void draw_GameTable(void) {
 // Print the game info
 //**************************************
 void draw_GameInfo(void) {
-	extern gameInfo_t g_gameInfo;
+	extern gameInfo_t g_GameInfo;
 
 	color(BL_GR_LIGHT);
 	gotoxy(16, 1);
-	printf("Score: %ld", g_gameInfo.score);
+	printf("Score: %ld", g_GameInfo.score);
 
 	color(PINK);
 	gotoxy(42, 1);
-	printf("Steps: %ld", g_gameInfo.step);
+	printf("Steps: %ld", g_GameInfo.step);
 
 	color(GREEN_LIGTH);
 	gotoxy(44, 23);
-	printf("Time: %ld", g_gameInfo.time);
+	printf("Time: %ld", g_GameInfo.time);
 }
 
 //**************************************

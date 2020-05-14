@@ -9,6 +9,10 @@
 
 #define NUM_COUNT (11)    // total 11 valid game number
 #define LEN       (4)     // game table width and height
+#define D_UP      (72)    // keyboard up
+#define D_LEFT    (75)    // keyboard left
+#define D_RIGHT   (77)    // keyboard right
+#define D_DOWN    (80)    // keyboard down
 
 typedef enum __gameChoice_t
 {
