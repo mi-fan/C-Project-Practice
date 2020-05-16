@@ -100,7 +100,7 @@ void menu(void) {
 		status = game_main(choice);
 
 		// handle the invalid choice
-		if (GS_INVALID == status) {
+		if (FALSE == status) {
 			gotoxy(21, 23);
 			color(RED);
 			printf("Input a integer of 1, 2, 3, 4 ...  \b");
@@ -172,5 +172,5 @@ void draw_GameInfo(void) {
 // Set number colors
 //**************************************
 void set_NumColor(color_t col) {
-	color(num_color[NUM_COUNT]);
+	color(num_color[col]);
 }

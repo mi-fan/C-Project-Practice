@@ -4,7 +4,7 @@
 // Run game option according to choice
 //**************************************
 int game_main(int choice) {
-	gameStatus_t status = GS_NORM;
+	int status = TRUE;
 
 	switch (choice)
 	{
@@ -19,11 +19,11 @@ int game_main(int choice) {
 		exit(0);
 		break;
 	default:
-		status = GS_INVALID;
+		status = FALSE;
 		break;
 	}
 
-	if (GS_INVALID == status) {
+	if (FALSE == status) {
 		return status;
 	}
 
@@ -35,7 +35,7 @@ int game_main(int choice) {
 //****************************************
 int nums_Align(int* line) {
 	int i, j;
-	int ret = FALSE;
+	int ret = ST_ILLEGAL;
 	
 	j = LEN - 1;
 	// the valid number should move to end of the line
@@ -53,7 +53,7 @@ int nums_Align(int* line) {
 			}
 			line[i] = line[j];
 			line[j] = 0;
-			ret = TRUE;   // effective movement is possible
+			ret = ST_RUN;   // effective movement is possible
 		}
 	}
 
@@ -66,8 +66,8 @@ int nums_Align(int* line) {
 //********************************************
 int nums_Add(int* line) {
 	extern gameInfo_t g_GameInfo;
-	int i, j;
-	int ret = FALSE;
+	int i;
+	int ret = ST_ILLEGAL;
 
 	// e.g. 2 0 4 4 --->  0 2 4 4
 	ret |= nums_Align(line);
@@ -80,7 +80,7 @@ int nums_Add(int* line) {
 			line[i] = (line[i] << 1);
 			line[i - 1] = 0;
 			g_GameInfo.score += line[i];
-			ret = TRUE;
+			ret = ST_RUN;
 		}
 	}
 
@@ -92,7 +92,7 @@ int nums_Add(int* line) {
 //********************************************
 // Divide the game table into 4 lines
 //********************************************
-inline void divide_RowColumn(int dir, int fix, int arg, int* line, int* table[]) {
+inline void divide_RowColumn(int dir, int fix, int arg, int* line, int table[4][4]) {
 	switch (dir)
 	{
 	case D_UP:
@@ -115,7 +115,7 @@ inline void divide_RowColumn(int dir, int fix, int arg, int* line, int* table[])
 //********************************************
 // Combine the 4 lines to game table
 //********************************************
-inline void combine_RowColumn(int dir, int fix, int arg, int* line, int* table[]) {
+inline void combine_RowColumn(int dir, int fix, int arg, int* line, int table[4][4]) {
 	switch (dir)
 	{
 	case D_UP:
@@ -138,11 +138,11 @@ inline void combine_RowColumn(int dir, int fix, int arg, int* line, int* table[]
 //********************************************
 // Try to move in specific direction
 //********************************************
-int move_Try(int dir) {
+int kb_Move(int dir) {
 	extern int g_GameTable[LEN][LEN];
 	int line[LEN] = { 0, 0, 0, 0 };
 	int i, j;
-	int ret = FALSE;
+	int ret = ST_FAIL;
 
 
 	for (i = 0; i < LEN; i++) {
@@ -158,6 +158,51 @@ int move_Try(int dir) {
 	}
 
 	return ret;
+}
+
+//********************************************
+// ESC command handler
+//********************************************
+int kb_Esc(void) {
+	char ch;
+	int ret;
+
+	gotoxy(20, 23);
+	color(YELLOW);
+	printf("Are you sure to quit game? [y/n]");
+
+
+	if (('y' == ch) || ('Y' == ch)) {
+		ret = ST_QUIT;
+	}
+	else {
+		ret = ST_RESUME;             //N or other input is considered as continue command
+	}
+
+	return ret;
+}
+
+int kb_control(int key){
+	int status = ST_ILLEGAL;
+
+	switch (key)
+	{
+	case D_UP:
+	case D_LEFT:
+	case D_RIGHT:
+	case D_DOWN:
+		status = kb_Move(key);
+		break;
+	case ESC:              // press ESC to pause or quit game
+		status = kb_Esc(key);
+		break;
+
+	default:
+		status = ST_ILLEGAL;
+		break;
+	}
+
+	return status;
 }
 
 

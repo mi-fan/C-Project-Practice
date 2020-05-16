@@ -13,6 +13,7 @@
 #define D_LEFT    (75)    // keyboard left
 #define D_RIGHT   (77)    // keyboard right
 #define D_DOWN    (80)    // keyboard down
+#define ESC       (27)    // keyboard ESC
 
 typedef enum __gameChoice_t
 {
@@ -25,8 +26,11 @@ typedef enum __gameChoice_t
 
 typedef enum __gameStatus_t
 {
-	GS_NORM,
-	GS_INVALID,
+	ST_FAIL,
+	ST_RUN,
+	ST_ILLEGAL,
+	ST_RESUME,
+	ST_QUIT,
 }gameStatus_t;
 
 typedef enum __color_t
