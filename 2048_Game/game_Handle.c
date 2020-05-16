@@ -263,11 +263,18 @@ void game_UpdateTable(void) {
 			}
 
 			num = g_GameTable[i][j];
-			gotoxy(15 + j * 10 + 5, 2 + i * 5 + 3);
+			gotoxy(15 + j * 10 + 4, 2 + i * 5 + 3);
 			set_NumColor(num);
 			printf("%d", num);
 		}
 	}
+}
+
+//********************************************
+// Show the failure text
+//********************************************
+void game_FailScreen(void) {
+
 }
 
 //********************************************
@@ -291,11 +298,12 @@ void game_Main(void) {
 			if (res & (ST_ILLEGAL|ST_RESUME)) {    // invalid operation, get another hit
 				continue;
 			}
-			else if (res & ST_QUIT) {      // player quit the game, return to main screen
+			else if (res & ST_QUIT) {              // player quit the game, return to main screen
 				return;            
 			}
 			else if (res & ST_FAIL) {
-				//TODO: FAIL BANNER
+				game_FailScreen();
+				return;
 			}
 			
 			// res == ST_RUN, successful step
