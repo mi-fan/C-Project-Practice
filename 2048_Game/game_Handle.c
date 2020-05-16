@@ -26,9 +26,10 @@ int game_Route(int choice) {
 	}
 
 	if (FALSE == status) {
-		return status;
+		//TODO: ILLEGAL COMMAND HANDLE
 	}
 
+	return status;
 }
 
 //****************************************
@@ -271,13 +272,6 @@ void game_UpdateTable(void) {
 }
 
 //********************************************
-// Show the failure text
-//********************************************
-void game_FailScreen(void) {
-
-}
-
-//********************************************
 // Game play process
 //********************************************
 void game_Main(void) {
@@ -302,7 +296,7 @@ void game_Main(void) {
 				return;            
 			}
 			else if (res & ST_FAIL) {
-				game_FailScreen();
+				draw_FailScreen();
 				return;
 			}
 			
