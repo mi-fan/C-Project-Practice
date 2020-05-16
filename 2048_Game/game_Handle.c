@@ -1,15 +1,17 @@
 #include "common.h"
 
+void game_Main(void);
+
 //**************************************
 // Run game option according to choice
 //**************************************
-int game_main(int choice) {
+int game_Route(int choice) {
 	int status = TRUE;
 
 	switch (choice)
 	{
 	case CHC_BEGIN:
-		draw_GameTable();
+		game_Main();
 		break;
 	case CHC_RULE:
 		break;
@@ -33,7 +35,7 @@ int game_main(int choice) {
 // Align the non-zero number to high grid
 // e.g. 2 0 2 4 ----> 0 2 2 4
 //****************************************
-int nums_Align(int* line) {
+static int nums_Align(int* line) {
 	int i, j;
 	int ret = ST_ILLEGAL;
 	
@@ -64,7 +66,7 @@ int nums_Align(int* line) {
 // Add the numbers in one row or column
 // Return value indicates the move capability
 //********************************************
-int nums_Add(int* line) {
+static int nums_Add(int* line) {
 	extern gameInfo_t g_GameInfo;
 	int i;
 	int ret = ST_ILLEGAL;
@@ -138,7 +140,7 @@ inline void combine_RowColumn(int dir, int fix, int arg, int* line, int table[4]
 //********************************************
 // Try to move in specific direction
 //********************************************
-int kb_Move(int dir) {
+static int kb_Move(int dir) {
 	extern int g_GameTable[LEN][LEN];
 	int line[LEN] = { 0, 0, 0, 0 };
 	int i, j;
@@ -163,7 +165,7 @@ int kb_Move(int dir) {
 //********************************************
 // ESC command handler
 //********************************************
-int kb_Esc(void) {
+static int kb_Esc(void) {
 	char ch;
 	int ret;
 
@@ -171,6 +173,7 @@ int kb_Esc(void) {
 	color(YELLOW);
 	printf("Are you sure to quit game? [y/n]");
 
+	ch = _getch();
 
 	if (('y' == ch) || ('Y' == ch)) {
 		ret = ST_QUIT;
@@ -182,7 +185,10 @@ int kb_Esc(void) {
 	return ret;
 }
 
-int kb_control(int key){
+//********************************************
+// Processing the keyboard input
+//********************************************
+static int kb_control(int key){
 	int status = ST_ILLEGAL;
 
 	switch (key)
@@ -194,7 +200,7 @@ int kb_control(int key){
 		status = kb_Move(key);
 		break;
 	case ESC:              // press ESC to pause or quit game
-		status = kb_Esc(key);
+		status = kb_Esc();
 		break;
 
 	default:
@@ -204,5 +210,101 @@ int kb_control(int key){
 
 	return status;
 }
+
+//********************************************
+// Clear former screen, draw game table
+//********************************************
+void game_Begin(void) {
+	int;
+	extern gameInfo_t g_GameInfo;
+
+	system("CLS");
+	g_GameInfo.time = time(NULL);    // get current time as begin time
+
+	draw_GameTable();
+}
+
+//********************************************
+// Randomly generate one number in empty grid
+//********************************************
+void game_RandNum(void) {
+	int i = 0, j = 0;
+	extern int g_GameTable[LEN][LEN];
+	
+	srand(time(NULL));
+
+	// randomly find a grid without non-zero number
+	do {
+		i = rand() % LEN;
+		j = rand() % LEN;
+	} while (g_GameTable[i][i] != 0);
+
+	// generate 2 or 4
+	if (rand() & 0x1) {               
+		g_GameTable[i][j] = 2;
+	}
+	else {
+		g_GameTable[i][j] = 4;
+	}
+}
+
+//********************************************
+// Update number and color after moving
+//********************************************
+void game_UpdateTable(void) {
+	int i, j;
+	int num;
+	extern int g_GameTable[LEN][LEN];
+
+	for (i = 0; i < LEN; i++) {
+		for (j = 0; j < LEN; j++) {
+			if (g_GameTable[i][j] == 0){
+				continue;
+			}
+
+			num = g_GameTable[i][j];
+			gotoxy(15 + j * 10 + 5, 2 + i * 5 + 3);
+			set_NumColor(num);
+			printf("%d", num);
+		}
+	}
+}
+
+//********************************************
+// Game play process
+//********************************************
+void game_Main(void) {
+	char ch;
+	int res;
+
+	game_Begin();         // keep game frame fixed
+	game_RandNum();       // add new number
+	game_UpdateTable();   // show the first number
+
+	while (TRUE) {
+		if (_kbhit()) {
+			ch = _getch();
+
+			// move the number, or change game status
+			res = kb_control(ch);
+
+			if (res & (ST_ILLEGAL|ST_RESUME)) {    // invalid operation, get another hit
+				continue;
+			}
+			else if (res & ST_QUIT) {      // player quit the game, return to main screen
+				return;            
+			}
+			else if (res & ST_FAIL) {
+				//TODO: FAIL BANNER
+			}
+			
+			// res == ST_RUN, successful step
+			game_RandNum();       // add new number
+			game_UpdateTable();   // update table after moving and adding numbers
+
+		}
+	}
+}
+
 
 

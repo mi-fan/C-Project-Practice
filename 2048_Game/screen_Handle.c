@@ -97,7 +97,7 @@ void menu(void) {
 	{
 		scanf_s("%d", &choice);
 
-		status = game_main(choice);
+		status = game_Route(choice);
 
 		// handle the invalid choice
 		if (FALSE == status) {
@@ -171,6 +171,6 @@ void draw_GameInfo(void) {
 //**************************************
 // Set number colors
 //**************************************
-void set_NumColor(color_t col) {
+void set_NumColor(int col) {
 	color(num_color[col]);
 }
