@@ -244,7 +244,7 @@ void game_RandNum(void) {
 	do {
 		i = rand() % LEN;
 		j = rand() % LEN;
-	} while (g_GameTable[i][i] != 0);
+	} while (g_GameTable[i][j] != 0);
 
 	// generate 2 or 4
 	if (rand() & 0x1) {               

@@ -1,7 +1,6 @@
 #include "screen_Handle.h"
 
-const num_color[NUM_COUNT] = { WHITE, BLUE_LIGHT, GREEN_LIGTH, BL_GR_LIGHT, PINK, YELLOW,
-								GRAY, PURPLE, BLUE_DEEP, GREEN_DEEP, RED };
+
 
 //**************************************
 // Set the character color
@@ -257,6 +256,48 @@ void draw_FailScreen(void) {
 //**************************************
 // Set number colors
 //**************************************
-void set_NumColor(int col) {
-	color(num_color[col]);
+void set_NumColor(int num) {
+	int col;
+
+	switch (num)
+	{
+	case 2:
+		col = WHITE;
+		break;
+	case 4:
+		col = BLUE_LIGHT;
+		break;
+	case 8:
+		col = GREEN_LIGTH;
+		break;
+	case 16:
+		col = BL_GR_LIGHT;
+		break;
+	case 32:
+		col = PINK;
+		break;
+	case 64:
+		col = YELLOW;
+		break;
+	case 128:
+		col = GRAY;
+		break;
+	case 256:
+		col = RED;
+		break;
+	case 512:
+		col = YELLOW_DARK;
+		break;
+	case 1024:
+		col = WHITE_LIGHT;
+		break;
+	case 2048:
+		col = YELLOW_DARK;
+		break;
+
+	default:
+		col = WHITE;
+		break;
+	}
+	color(col);
 }
