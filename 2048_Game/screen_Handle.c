@@ -105,7 +105,7 @@ void menu(void) {
 			printf("Input a integer of 1, 2, 3, 4 ...  \b");
 		}
 		else{
-			break;
+			continue;
 		}
 	}
 }

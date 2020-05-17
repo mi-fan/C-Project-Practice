@@ -56,4 +56,5 @@ typedef struct __gameInfo_t
 	int score;
 	int step;
 	int time;
+	int numCount;
 }gameInfo_t;

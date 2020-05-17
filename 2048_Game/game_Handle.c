@@ -83,6 +83,7 @@ static int nums_Add(int* line) {
 			line[i] = (line[i] << 1);
 			line[i - 1] = 0;
 			g_GameInfo.score += line[i];
+			g_GameInfo.numCount--;
 
 			if (line[i] == 2048)
 			{
@@ -227,7 +228,7 @@ void game_Begin(void) {
 
 	system("CLS");
 	g_GameInfo.time = time(NULL);    // get current time as begin time
-
+	g_GameInfo.numCount = 0;
 	draw_GameTable();
 }
 
@@ -253,6 +254,8 @@ void game_RandNum(void) {
 	else {
 		g_GameTable[i][j] = 4;
 	}
+
+	g_GameInfo.numCount++;
 }
 
 //********************************************
@@ -274,7 +277,7 @@ void game_UpdateTable(void) {
 				continue;
 			}
 
-			gotoxy(15 + j * 10 + 4, 2 + i * 5 + 3);
+			gotoxy(15 + j * 9 + 5, 2 + i * 5 + 3);
 			set_NumColor(num);
 			printf("%d", num);
 		}
@@ -295,8 +298,10 @@ void game_Main(void) {
 	while (TRUE) {
 		//if (_kbhit())
 		{
-			ch = _getch();   // getch will return 0 or 0xE0 first
-			ch = _getch();
+			if ( (ch = _getch()) != 27) {   // getch will return 0xE0 before ¡ü¡ı¡û¡ú
+				ch = _getch();
+			}
+
 
 			// move the number, or change game status
 			res = kb_control(ch);
@@ -312,6 +317,13 @@ void game_Main(void) {
 				return;            
 			}
 			else if (res & ST_FAIL) {
+				draw_FailScreen();
+				return;
+			}
+
+			// if there are still 16 numbers after movement
+			// no chance to reduce old and generate new numbers
+			if (g_GameInfo.numCount == LEN * LEN) { 
 				draw_FailScreen();
 				return;
 			}
