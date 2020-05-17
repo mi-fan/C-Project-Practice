@@ -230,6 +230,15 @@ void game_Begin(void) {
 	g_GameInfo.time = time(NULL);    // get current time as begin time
 	g_GameInfo.numCount = 0;
 	draw_GameTable();
+	draw_GameInfo();
+}
+
+int game_CheckFull(void) {
+	extern gameInfo_t g_GameInfo;
+	if (g_GameInfo.numCount == 16)
+		return TRUE;
+	else
+		return FALSE;
 }
 
 //********************************************
@@ -238,7 +247,8 @@ void game_Begin(void) {
 void game_RandNum(void) {
 	int i = 0, j = 0;
 	extern int g_GameTable[LEN][LEN];
-	
+	extern gameInfo_t g_GameInfo;
+
 	srand(time(NULL));
 
 	// randomly find a grid without non-zero number
@@ -266,20 +276,19 @@ void game_UpdateTable(void) {
 	int num;
 	extern int g_GameTable[LEN][LEN];
 
-	system("CLS");
 	draw_GameTable();
+	draw_GameInfo();
 
 	for (i = 0; i < LEN; i++) {
 		for (j = 0; j < LEN; j++) {
 			num = g_GameTable[i][j];
 
-			if (num == 0) {
-				continue;
-			}
+			gotoxy(15 + j * 9 + 4, 2 + i * 5 + 3);
 
-			gotoxy(15 + j * 9 + 5, 2 + i * 5 + 3);
-			set_NumColor(num);
-			printf("%d", num);
+			if (num != 0) {
+				set_NumColor(num);
+				printf("%d", num);
+			}
 		}
 	}
 }
@@ -323,7 +332,7 @@ void game_Main(void) {
 
 			// if there are still 16 numbers after movement
 			// no chance to reduce old and generate new numbers
-			if (g_GameInfo.numCount == LEN * LEN) { 
+			if (TRUE == game_CheckFull()) { 
 				draw_FailScreen();
 				return;
 			}

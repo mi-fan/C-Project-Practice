@@ -29,6 +29,8 @@ void gotoxy(int x, int y) {
 // Draw the game logo "2048"
 //**************************************
 void draw_Title(void) {
+
+	system("CLS");
 	color(BL_GR_LIGHT);
 	gotoxy(17, 2);
 	printf("¡ö¡ö¡ö     ¡ö¡ö¡ö¡ö     ¡ö  ¡ö     ¡ö¡ö¡ö¡ö");
@@ -83,17 +85,18 @@ void menu(void) {
 	int choice = 0;
 	int status;
 
-	// draw the menu with frame
-	draw_Menu();
-	
-	// keyboard input
-	gotoxy(21, 22);
-	color(PURPLE);
-	printf("Your choice is ... ");
-
 	// run game branch
 	while (TRUE)
 	{
+		// draw the menu with frame
+		draw_Title();
+		draw_Menu();
+	
+		// keyboard input
+		gotoxy(21, 22);
+		color(PURPLE);
+		printf("Your choice is ... ");
+
 		scanf_s("%d", &choice);
 
 		status = game_Route(choice);
@@ -105,6 +108,8 @@ void menu(void) {
 			printf("Input a integer of 1, 2, 3, 4 ...  \b");
 		}
 		else{
+			printf("\n\n\npress any key to continue...");
+			_getch();
 			continue;
 		}
 	}
@@ -164,49 +169,57 @@ void draw_GameInfo(void) {
 
 	color(GREEN_LIGTH);
 	gotoxy(44, 23);
-	printf("Time: %ld", g_GameInfo.time);
+	printf("Time: %ld s", time(NULL) - g_GameInfo.time);
+
+	g_GameInfo.step++;
 }
 
 //********************************************
 // Draw the winning text
 //********************************************
 void draw_WinScreen(void) {
+	int idx;
 	extern gameInfo_t g_GameInfo;
 
 	system("CLS");
 
 	// show the game score and steps
+	idx = 3;
 	color(WHITE_LIGHT);
-	gotoxy(34, 3);
+	gotoxy(34, idx++);
 	printf("Your final score is: %d", g_GameInfo.score);
-	gotoxy(34, 4);
+	gotoxy(34, idx++);
 	printf("   Your total steps: %d", g_GameInfo.step);
-	gotoxy(34, 4);
+	gotoxy(34, idx++);
 	printf("    Your have spend: %d sec", time(NULL) - g_GameInfo.time);
+
+	idx += 4;
 
 	// show the banner
 	color(BL_GR_LIGHT);
-	gotoxy(1, 7);
+	gotoxy(1, idx++);
 	printf("      ¡ö              ¡ö              ¡ö       ¡ö¡ö¡ö¡ö       ¡ö¡ö        ¡ö \n");
-	gotoxy(1, 8);
+	gotoxy(1, idx++);
 	printf("       ¡ö            ¡ö¡ö            ¡ö           ¡ö          ¡ö ¡ö       ¡ö \n");
-	gotoxy(1, 9);
+	gotoxy(1, idx++);
 	printf("        ¡ö          ¡ö  ¡ö          ¡ö            ¡ö          ¡ö  ¡ö      ¡ö \n");
-	gotoxy(1, 10);
+	gotoxy(1, idx++);
 	printf("         ¡ö        ¡ö    ¡ö        ¡ö             ¡ö          ¡ö   ¡ö     ¡ö \n");
-	gotoxy(1, 11);
+	gotoxy(1, idx++);
 	printf("          ¡ö      ¡ö      ¡ö      ¡ö              ¡ö          ¡ö    ¡ö    ¡ö \n");
-	gotoxy(1, 12);
+	gotoxy(1, idx++);
 	printf("           ¡ö    ¡ö        ¡ö    ¡ö               ¡ö          ¡ö     ¡ö   ¡ö \n");
-	gotoxy(1, 13);
+	gotoxy(1, idx++);
 	printf("            ¡ö  ¡ö          ¡ö  ¡ö                ¡ö          ¡ö      ¡ö  ¡ö \n");
-	gotoxy(1, 14);
+	gotoxy(1, idx++);
 	printf("             ¡ö¡ö            ¡ö¡ö                 ¡ö          ¡ö       ¡ö ¡ö \n");
-	gotoxy(1, 15);
+	gotoxy(1, idx++);
 	printf("              ¡ö              ¡ö               ¡ö¡ö¡ö¡ö       ¡ö        ¡ö¡ö \n");
 
+	idx += 4;
+
 	// show the text
-	gotoxy(33, 17);
+	gotoxy(25, 17);
 	color(PINK);
 	printf("Well done! Remember winning is not the end of fight");
 }
@@ -215,42 +228,47 @@ void draw_WinScreen(void) {
 // Draw the failure text
 //********************************************
 void draw_FailScreen(void) {
+	int idx;
 	extern gameInfo_t g_GameInfo;
 
 	system("CLS");
 	
 	// show the game score and steps
+	idx = 3;
 	color(YELLOW);
-	gotoxy(34, 3);
+	gotoxy(34, idx++);
 	printf("Your final score is: %d", g_GameInfo.score);
-	gotoxy(34, 4);
+	gotoxy(34, idx++);
 	printf("   Your total steps: %d", g_GameInfo.step);
 
 	// show the banner
+	idx = 10;
 	color(RED_DEEP);
-	gotoxy(19, 7);
+	gotoxy(19, idx++);
 	printf("      ¡ö¡ö¡ö¡ö¡ö     ¡ö         ¡ö       ¡ö ¡ö           \n");
-	gotoxy(19, 8);
+	gotoxy(19, idx++);
 	printf("      ¡ö             ¡ö¡ö       ¡ö       ¡ö    ¡ö        \n");
-	gotoxy(19, 9);
+	gotoxy(19, idx++);
 	printf("      ¡ö             ¡ö ¡ö      ¡ö       ¡ö       ¡ö     \n");
-	gotoxy(19, 10);
+	gotoxy(19, idx++);
 	printf("      ¡ö             ¡ö  ¡ö     ¡ö       ¡ö        ¡ö    \n");
-	gotoxy(19, 11);
-	printf("      ¡ö¡ö¡ö¡ö¡ö     ¡ö   ¡ö    ¡ö       ¡ö         ¡ö   \n");
-	gotoxy(19, 12);
+	gotoxy(19, idx++);
+	printf("      ¡ö¡ö¡ö¡ö¡ö     ¡ö   ¡ö    ¡ö       ¡ö        ¡ö    \n");
+	gotoxy(19, idx++);
 	printf("      ¡ö             ¡ö    ¡ö   ¡ö       ¡ö        ¡ö    \n");
-	gotoxy(19, 13);
+	gotoxy(19, idx++);
 	printf("      ¡ö             ¡ö     ¡ö  ¡ö       ¡ö       ¡ö     \n");
-	gotoxy(19, 14);
+	gotoxy(19, idx++);
 	printf("      ¡ö             ¡ö      ¡ö ¡ö       ¡ö     ¡ö       \n");
-	gotoxy(19, 15);
+	gotoxy(19, idx++);
 	printf("      ¡ö¡ö¡ö¡ö¡ö     ¡ö         ¡ö       ¡ö ¡ö           \n");
 
+	idx += 4;
+
 	// show the text
-	gotoxy(30, 17);
+	gotoxy(23, idx++);
 	color(PINK);
-	printf("Fails and wins are just life, Heroes will insist");
+	printf("Fails and wins are just life, Heroes will insist\n");
 }
 
 //**************************************
