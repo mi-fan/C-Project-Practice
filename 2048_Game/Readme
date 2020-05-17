@@ -1,0 +1,9 @@
+V1.0 build:
+1. Normal start and play game
+2. Show game instruction
+3. Pause and resume during playing
+
+V1.1 target:
+1. Real-time flush of game duration in game table
+2. Some visual optimization
+3. Fix possible bugs
