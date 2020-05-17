@@ -82,7 +82,7 @@ void draw_Menu(void) {
 //**************************************
 void menu(void) {
 	int choice = 0;
-	gameStatus_t status;
+	int status;
 
 	// draw the menu with frame
 	draw_Menu();
@@ -121,7 +121,7 @@ void draw_GameTable(void) {
 	// draw the horizon lines
 	for (j = 2; j <= 22; j += 5) {
 		gotoxy(15, j);
-		for (k = 1; k < 42; k++) {
+		for (k = 1; k < 38; k++) {
 			printf("-");
 		}
 		printf("\n");

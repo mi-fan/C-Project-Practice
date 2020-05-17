@@ -38,7 +38,7 @@ int game_Route(int choice) {
 //****************************************
 static int nums_Align(int* line) {
 	int i, j;
-	int ret = ST_ILLEGAL;
+	int ret = ST_FAIL;
 	
 	j = LEN - 1;
 	// the valid number should move to end of the line
@@ -70,7 +70,7 @@ static int nums_Align(int* line) {
 static int nums_Add(int* line) {
 	extern gameInfo_t g_GameInfo;
 	int i;
-	int ret = ST_ILLEGAL;
+	int ret = ST_FAIL;
 
 	// e.g. 2 0 4 4 --->  0 2 4 4
 	ret |= nums_Align(line);
@@ -79,10 +79,16 @@ static int nums_Add(int* line) {
 	// the sum shows in higher grid
 	// e.g. 0 2 4 4 ----> 0 2 0 8
 	for (i = LEN - 1; i > 0 ; i--) {
-		if (line[i - 1] == line[i]) {
+		if ((line[i - 1] == line[i])&&(0 != line[i])) {
 			line[i] = (line[i] << 1);
 			line[i - 1] = 0;
 			g_GameInfo.score += line[i];
+
+			if (line[i] == 2048)
+			{
+				return ST_WIN;
+			}
+
 			ret = ST_RUN;
 		}
 	}
@@ -190,7 +196,7 @@ static int kb_Esc(void) {
 // Processing the keyboard input
 //********************************************
 static int kb_control(int key){
-	int status = ST_ILLEGAL;
+	int status = ST_FAIL;
 
 	switch (key)
 	{
@@ -257,13 +263,17 @@ void game_UpdateTable(void) {
 	int num;
 	extern int g_GameTable[LEN][LEN];
 
+	system("CLS");
+	draw_GameTable();
+
 	for (i = 0; i < LEN; i++) {
 		for (j = 0; j < LEN; j++) {
-			if (g_GameTable[i][j] == 0){
+			num = g_GameTable[i][j];
+
+			if (num == 0) {
 				continue;
 			}
 
-			num = g_GameTable[i][j];
 			gotoxy(15 + j * 10 + 4, 2 + i * 5 + 3);
 			set_NumColor(num);
 			printf("%d", num);
@@ -275,7 +285,7 @@ void game_UpdateTable(void) {
 // Game play process
 //********************************************
 void game_Main(void) {
-	char ch;
+	int ch;
 	int res;
 
 	game_Begin();         // keep game frame fixed
@@ -283,13 +293,19 @@ void game_Main(void) {
 	game_UpdateTable();   // show the first number
 
 	while (TRUE) {
-		if (_kbhit()) {
+		//if (_kbhit())
+		{
+			ch = _getch();   // getch will return 0 or 0xE0 first
 			ch = _getch();
 
 			// move the number, or change game status
 			res = kb_control(ch);
 
-			if (res & (ST_ILLEGAL|ST_RESUME)) {    // invalid operation, get another hit
+			if (res & ST_WIN) {
+				draw_WinScreen();
+				return;
+			}
+			else if (res & (ST_ILLEGAL|ST_RESUME)) {    // invalid operation, get another hit
 				continue;
 			}
 			else if (res & ST_QUIT) {              // player quit the game, return to main screen
