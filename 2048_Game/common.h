@@ -25,7 +25,6 @@
 typedef enum __gameChoice_t
 {
 	CHC_BEGIN = 1,
-	CHC_RULE,
 	CHC_INSTRUCT,
 	CHC_EXIT,
 	CHC_INVALID,

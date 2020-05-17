@@ -13,9 +13,8 @@ int game_Route(int choice) {
 	case CHC_BEGIN:
 		game_Main();
 		break;
-	case CHC_RULE:
-		break;
 	case CHC_INSTRUCT:
+		draw_Instruct();
 		break;
 	case CHC_EXIT:
 		exit(0);
@@ -225,10 +224,15 @@ static int kb_control(int key){
 void game_Begin(void) {
 	int;
 	extern gameInfo_t g_GameInfo;
+	extern int g_GameTable[LEN][LEN];
 
 	system("CLS");
+	
 	g_GameInfo.time = time(NULL);    // get current time as begin time
 	g_GameInfo.numCount = 0;
+	
+	memset(g_GameTable, 0, sizeof(g_GameTable));
+
 	draw_GameTable();
 	draw_GameInfo();
 }

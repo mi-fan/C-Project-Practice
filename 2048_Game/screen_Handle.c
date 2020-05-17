@@ -42,8 +42,6 @@ void draw_Title(void) {
 	printf("¡ö         ¡ö    ¡ö     ¡ö¡ö¡ö     ¡ö    ¡ö");
 	gotoxy(17, 6);
 	printf("¡ö¡ö¡ö     ¡ö¡ö¡ö¡ö         ¡ö     ¡ö¡ö¡ö¡ö");
-
-
 }
 
 //**************************************
@@ -71,49 +69,41 @@ void draw_Menu(void) {
 	gotoxy(22, 12);
 	printf("1. Begin");
 	gotoxy(42, 12);
-	printf("2. Game Rule");
-	gotoxy(22, 16);
-	printf("3. Instruction");
-	gotoxy(42, 16);
-	printf("4. Exit");
+	printf("2. Instruction");
+	gotoxy(32, 16);
+	printf("3. Exit");
 }
 
 //**************************************
-// Show the menu with game options
+// Draw the game instructions
 //**************************************
-void menu(void) {
-	int choice = 0;
-	int status;
+void draw_Instruct(void) {
+	int idx;
 
-	// run game branch
-	while (TRUE)
-	{
-		// draw the menu with frame
-		draw_Title();
-		draw_Menu();
-	
-		// keyboard input
-		gotoxy(21, 22);
-		color(PURPLE);
-		printf("Your choice is ... ");
+	system("CLS");
 
-		scanf_s("%d", &choice);
+	color(GREEN_LIGTH);
+	idx = 7;
+	gotoxy(18, idx);
+	printf("1. Player use ¡ü¡ý¡û¡ú to move the numbers");
+	idx += 2;
+	gotoxy(18, idx);
+	printf("2. If two numbers are same in the selected direction, numbers are merged");
+	idx += 2;
+	gotoxy(18, idx);
+	printf("3. After each movement, new number is randomly added to the table");
+	idx += 2;
+	gotoxy(18, idx);
+	printf("4. If 2048 is produced, game wins");
+	idx += 2;
+	gotoxy(18, idx);
+	printf("5. If numbers cannot be moved, game fails");
+	idx += 2;
+	gotoxy(18, idx);
+	printf("6. Press ESC to Pause or Quit game");
 
-		status = game_Route(choice);
-
-		// handle the invalid choice
-		if (FALSE == status) {
-			gotoxy(21, 23);
-			color(RED);
-			printf("Input a integer of 1, 2, 3, 4 ...  \b");
-		}
-		else{
-			printf("\n\n\npress any key to continue...");
-			_getch();
-			continue;
-		}
-	}
 }
+
 //**************************************
 // Draw the game area grids
 //**************************************
