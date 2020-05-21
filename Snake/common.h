@@ -20,6 +20,14 @@ typedef enum __direction_t
 	RIGHT,
 }direction_t;
 
+typedef enum __selection_t
+{
+	S_START = 1,
+	S_INSTRUCT,
+	S_QUIT,
+	S_INVALID,
+};
+
 typedef enum __color_t
 {
 	BLACK,

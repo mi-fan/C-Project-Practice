@@ -95,3 +95,39 @@ void drawSnakeLogo(void) {
 	gotoxy(35, 16);
 	printf("~--______-~             ~-___-~");
 }
+
+/***********************************
+* Draw the menu 
+***********************************/
+void drawMenu(void) {
+	int i, j;
+
+	color(BL_GR_LIGHT);
+	gotoxy(43, 18);
+	printf("Snake Likes Eating");
+
+	// draw the top and bottom frame
+	color(YELLOW);
+	for (i = 20; i <= 26; i+=6) {
+		for (j = 27; j <= 74; j++) {
+			gotoxy(j, i);
+			if (i == 20 || i == 26) {
+				printf("=");
+			}
+		}
+	}
+
+	color(WHITE);
+	gotoxy(35, 22);
+	printf("1. Start Game");
+
+	gotoxy(55, 22);
+	printf("2. Instruction");
+
+	gotoxy(35, 24);
+	printf("3. Quit");
+
+	color(PINK);
+	gotoxy(29, 27);
+	printf("Please select [1/2/3] : [ ]\b\b");
+}
