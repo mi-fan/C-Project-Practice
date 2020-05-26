@@ -131,3 +131,65 @@ void drawMenu(void) {
 	gotoxy(29, 27);
 	printf("Please select [1/2/3] : [ ]\b\b");
 }
+
+/*******************************
+* Draw the game map
+*******************************/
+void drawMap(void) {
+	int i, j;
+
+	// draw the top and bottom walls
+	color(PURPLE);
+	for (i = 0; i < 58; i += 2) {
+		gotoxy(i, 0);
+		printf("¡ö");
+		gotoxy(i, 26);
+		printf("¡ö");
+	}
+
+	// draw the left and right walls
+	for (i = 0; i < 26; i++) {
+		gotoxy(0, i);
+		printf("¡ö");
+		gotoxy(56, i);
+		printf("¡ö");
+	}
+
+	// draw the grid
+	for (i = 2; i < 56; i += 2) {
+		for (j = 1; j < 26; j++) {
+			gotoxy(i, j);
+			color(3);
+			printf("¡õ");
+		}
+	}
+}
+
+/*******************************
+* Show the real-time game info
+*******************************/
+void showGameInfo(void) {
+	File_out();
+	
+	color(BL_GR_LIGHT);
+	gotoxy(64, 4);
+	printf("# High Score # : %d", highScore);
+
+	color(YELLOW);
+	gotoxy(64, 8);
+	printf("Current score: %d", score);
+
+	color(PINK);
+	gotoxy(60, 12);
+	printf("*---------------------------*");
+	gotoxy(64, 14);
+	printf("Hints: ");
+	gotoxy(64, 15);
+	printf("1. Don't crash to the wall");
+	gotoxy(64, 16);
+	printf("2. Press A to speed up");
+	gotoxy(64, 17);
+	printf("3. Press S to speed down");
+	gotoxy(60, 19);
+	printf("*---------------------------*");
+}

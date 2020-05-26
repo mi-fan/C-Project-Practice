@@ -10,9 +10,13 @@ int main(void) {
 	
 	drawSnakeLogo();
 
+	File_Out();
+
 	drawMenu();
 
 	selection();
+
+
 
 	return 0;
 }
@@ -32,6 +36,9 @@ int selection(void) {
 		switch (sel)
 		{
 		case S_START:
+			system("CLS");
+			drawMap();
+			showGameInfo();
 			break;
 		case S_INSTRUCT:
 			break;
