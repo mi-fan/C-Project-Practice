@@ -39,7 +39,7 @@ int selection(void) {
 			system("CLS");
 			drawMap();
 			showGameInfo();
-			initSnake();
+			createSnake();
 			createFood();
 			break;
 		case S_INSTRUCT:
