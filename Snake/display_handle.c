@@ -1,4 +1,4 @@
-#include "display_handle.h"
+ï»¿#include "display_handle.h"
 
 //*********************************************//
 //                                             //
@@ -142,27 +142,29 @@ void drawMap(void) {
 	color(PURPLE);
 	for (i = 0; i < 58; i += 2) {
 		gotoxy(i, 0);
-		printf("¡ö");
+		printf("â– ");
 		gotoxy(i, 26);
-		printf("¡ö");
+		printf("â– ");
 	}
 
 	// draw the left and right walls
 	for (i = 0; i < 26; i++) {
 		gotoxy(0, i);
-		printf("¡ö");
+		printf("â– ");
 		gotoxy(56, i);
-		printf("¡ö");
+		printf("â– ");
 	}
 
 	// draw the grid
+	/*
 	for (i = 2; i < 56; i += 2) {
 		for (j = 1; j < 26; j++) {
 			gotoxy(i, j);
 			color(3);
-			printf("¡õ");
+			printf("â–¡");
 		}
 	}
+	*/
 }
 
 /*******************************
@@ -190,4 +192,46 @@ void showGameInfo(void) {
 	printf("3. Press S to speed down");
 	gotoxy(60, 19);
 	printf("*------------------------------*");
+}
+
+/*******************************
+* Draw the original snake 
+*******************************/
+void initSnake(void) {
+	int i;
+	snake_t* tail;
+
+	tail = (snake_t*)malloc(sizeof(snake_t));
+
+	// assign the starting tail position
+	tail->x = 24;
+	tail->y = 5;
+	tail->next = NULL;
+
+	// grow from tail to head, just need to allocate head buffer each cycle
+	for (i = 0; i < 4; i++) {
+		head = (snake_t*)malloc(sizeof(snake_t));
+		head->next = tail;
+		head->x = 26 + 2 * i;
+		head->y = 5;
+		tail = head;
+	}
+	
+	i = 0;
+
+	// draw the snake from head to tail
+	while (tail != NULL){
+		gotoxy(tail->x, tail->y);
+		color(YELLOW);
+
+		if (i == 0) {
+			printf("â—");     // use â— to mark the snake head
+			i++;
+		}
+		else {
+			printf("â– ");
+		}
+
+		tail = tail->next;
+	}
 }
