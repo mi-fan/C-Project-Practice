@@ -169,8 +169,6 @@ void drawMap(void) {
 * Show the real-time game info
 *******************************/
 void showGameInfo(void) {
-	File_out();
-	
 	color(BL_GR_LIGHT);
 	gotoxy(64, 4);
 	printf("# High Score # : %d", highScore);
@@ -181,7 +179,7 @@ void showGameInfo(void) {
 
 	color(PINK);
 	gotoxy(60, 12);
-	printf("*---------------------------*");
+	printf("*------------------------------*");
 	gotoxy(64, 14);
 	printf("Hints: ");
 	gotoxy(64, 15);
@@ -191,5 +189,5 @@ void showGameInfo(void) {
 	gotoxy(64, 17);
 	printf("3. Press S to speed down");
 	gotoxy(60, 19);
-	printf("*---------------------------*");
+	printf("*------------------------------*");
 }

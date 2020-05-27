@@ -10,9 +10,10 @@
 * Read data from local file
 *******************************/
 void File_Out(void) {
-	FILE* fp;
+	FILE* fp = NULL;
+	errno_t err;
 
-	fp = fopen("data.txt", "a+");
+	err = fopen_s(&fp, "data.txt", "a+");
 	fscanf_s(fp, "%d", &highScore);
 	fclose(fp);
 }

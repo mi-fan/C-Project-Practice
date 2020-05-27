@@ -1,8 +1,14 @@
+#pragma once
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
 #include <windows.h>
 #include <time.h>
+#include "data_handle.h"
+#include "display_handle.h"
+#include "game_handle_basic.h"
+#include "game_handle_process.h"
+#include "screen_handle.h"
 
 /***********************
 * Macro define
@@ -26,7 +32,7 @@ typedef enum __selection_t
 	S_INSTRUCT,
 	S_QUIT,
 	S_INVALID,
-};
+}selection_t;
 
 typedef enum __color_t
 {
