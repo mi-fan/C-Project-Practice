@@ -29,6 +29,15 @@ typedef enum __selection_t
 	S_INVALID,
 }selection_t;
 
+typedef enum __gameResult_t
+{
+	G_NORMAL,
+	G_PASUE,
+	G_RESUME,
+	G_FAIL,
+	G_QUIT,
+}gameResult_t;
+
 typedef enum __color_t
 {
 	BLACK,
@@ -70,7 +79,7 @@ snake_t* seek;                // seek the body
 int score;
 int highScore;
 int scoreStep;
-int status;
+int directionStatus;
 int sleepTime;
 int gameResult;
 

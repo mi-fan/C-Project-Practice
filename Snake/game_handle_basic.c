@@ -154,5 +154,19 @@ void speedDown(void) {
 * Snake move without keyboard control
 **************************************/
 void snakeMoveNoControl(void) {
+	snake_t* nextHead;
+	int result;
 
+	nextHead = (snake_t*)malloc(sizeof(snake_t));
+
+	switch (directionStatus)
+	{
+	case UP:
+	case DOWN:
+	case LEFT:
+	case RIGHT:
+
+	default:
+		break;
+	}
 }
