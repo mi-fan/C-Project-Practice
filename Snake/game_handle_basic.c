@@ -91,3 +91,68 @@ void createSnake(void) {
 		tail = tail->next;
 	}
 }
+
+/*******************************
+* Check if head bite the body
+*******************************/
+int biteSelf(void) {
+	snake_t* self;
+
+	self = head->next;
+
+	while (self != NULL) {
+		if ((self->x == head->x) && (self->y == head->y)) {
+			return TRUE;
+		}
+		if (self->next != NULL) {
+			self = self->next;
+		}
+		else{
+			break;
+		}
+	}
+
+	return FALSE;
+}
+
+/*******************************
+* Check if head hit the wall
+*******************************/
+int hitWall(void) {
+	if (head->x == 0 || head->x == 56 || head->y == 0 || head->y == 26) {
+		return TRUE;
+	}
+	
+	return FALSE;
+}
+
+/*******************************
+* Speed up 
+*******************************/
+void speedUp(void) {
+	if (sleepTime >= 50) {
+		sleepTime -= 10;
+		scoreStep += 2;
+	}
+}
+
+/*******************************
+* Speed down
+*******************************/
+void speedDown(void) {
+	if (sleepTime < 350) {
+		sleepTime += 30;
+		scoreStep -= 2;
+
+		if (sleepTime == 350) {
+			scoreStep = 1;
+		}
+	}
+}
+
+/*************************************
+* Snake move without keyboard control
+**************************************/
+void snakeMoveNoControl(void) {
+
+}

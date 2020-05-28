@@ -11,11 +11,6 @@
 #include "screen_handle.h"
 
 /***********************
-* Macro define
-***********************/
-#define SCORE_STEP     (10)
-
-/***********************
 * Enum
 ***********************/
 typedef enum __direction_t
@@ -74,6 +69,7 @@ snake_t* seek;                // seek the body
 
 int score;
 int highScore;
+int scoreStep;
 int status;
 int sleepTime;
 int gameResult;
