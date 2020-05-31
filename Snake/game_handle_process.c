@@ -160,7 +160,7 @@ void keyboardControl(void) {
 		else if (GetAsyncKeyState(VK_F1)) {
 			speedUp();
 		}
-		else if (GetAsyncKeyState(VK_SPACE)) {
+		else if (GetAsyncKeyState(VK_F2)) {
 			speedDown();
 		}
 		Sleep(sleepTime);
