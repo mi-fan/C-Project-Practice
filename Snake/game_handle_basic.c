@@ -150,23 +150,57 @@ void speedDown(void) {
 	}
 }
 
-/*************************************
-* Snake move without keyboard control
-**************************************/
-void snakeMoveNoControl(void) {
-	snake_t* nextHead;
-	int result;
+/*******************************
+* Check if snake eats the food
+*******************************/
+int checkEatFood(snake_t* nextHead) {
+	if ((nextHead->x == food->x) && (nextHead->y == food->y)) {
+		return TRUE;
+	}
+	else {
+		return FALSE;
+	}
+}
 
-	nextHead = (snake_t*)malloc(sizeof(snake_t));
+/*******************************
+* Check if snake eats the food
+*******************************/
+void snakeMovePosition(BOOLEAN eatFlag) {
+	snake_t* last = head;
 
-	switch (directionStatus)
-	{
-	case UP:
-	case DOWN:
-	case LEFT:
-	case RIGHT:
+	// draw the head
+	color(YELLOW);
+	gotoxy(head->x, head->y);
+	printf("¡ñ");
 
-	default:
-		break;
+	seek = head->next;
+
+	// draw the body except tail
+	while (seek->next != NULL) {
+		gotoxy(seek->x, seek->y);
+		printf("¡ö");
+
+		if (seek->next != NULL) {
+			last = seek;
+			seek = seek->next;
+		}
+		else {
+			break;
+		}
+	}
+
+	// seek points to tail, last points to the last but one
+	// if eats food, keep the old tail and snake get one piece longer
+	if (TRUE == eatFlag) {
+		gotoxy(seek->x, seek->y);
+		printf("¡ö");
+		score += scoreStep;
+	}
+	else {        // clear and free old tail
+		color(BLACK);
+		gotoxy(seek->x, seek->y);
+		printf("  ");
+		last->next = NULL;   // update tail
+		free(seek);
 	}
 }

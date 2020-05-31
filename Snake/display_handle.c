@@ -187,9 +187,9 @@ void showGameInfo(void) {
 	gotoxy(64, 15);
 	printf("1. Don't crash to the wall");
 	gotoxy(64, 16);
-	printf("2. Press A to speed up");
+	printf("2. Press F1 to speed up");
 	gotoxy(64, 17);
-	printf("3. Press S to speed down");
+	printf("3. Press F2 to speed down");
 	gotoxy(60, 19);
 	printf("*------------------------------*");
 }
