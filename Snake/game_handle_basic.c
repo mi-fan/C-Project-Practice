@@ -57,6 +57,8 @@ void createSnake(void) {
 	int i;
 	snake_t* tail;
 
+	length = 0;  // init snake length
+
 	tail = (snake_t*)malloc(sizeof(snake_t));
 
 	// assign the starting tail position
@@ -71,6 +73,7 @@ void createSnake(void) {
 		head->x = 26 + 2 * i;
 		head->y = 5;
 		tail = head;
+		length++;
 	}
 
 	i = 0;
@@ -126,6 +129,20 @@ int hitWall(void) {
 	return FALSE;
 }
 
+/*************************************
+* Check if snake grows to max length
+**************************************/
+int growMax(void) {
+
+	// if there are rarely space for snake to move
+	// player should be winner
+	if (length >= (MAP_TOTAL_PIXEL - 2)) {
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
 /*******************************
 * Speed up 
 *******************************/
@@ -155,6 +172,7 @@ void speedDown(void) {
 *******************************/
 int checkEatFood(snake_t* nextHead) {
 	if ((nextHead->x == food->x) && (nextHead->y == food->y)) {
+		length++;       // if eat food, snake length plus one
 		return TRUE;
 	}
 	else {

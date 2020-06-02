@@ -41,6 +41,7 @@ int selection(void) {
 			showGameInfo();
 			createSnake();
 			createFood();
+			keyboardControl();
 			break;
 		case S_INSTRUCT:
 			break;

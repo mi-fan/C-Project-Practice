@@ -10,6 +10,11 @@
 #include "game_handle_process.h"
 #include "screen_handle.h"
 
+#define MAP_WIDTH         (58)
+#define MAP_HEIGHT        (26)
+#define MAP_TOTAL_PIXEL   ((MAP_WIDTH/2)*(MAP_HEIGHT))
+
+
 /***********************
 * Enum
 ***********************/
@@ -34,6 +39,7 @@ typedef enum __gameResult_t
 	G_NORMAL,
 	G_PASUE,
 	G_RESUME,
+	G_WIN,
 	G_FAIL,
 	G_QUIT,
 }gameResult_t;
@@ -76,6 +82,7 @@ snake_t* head;                // snake head
 snake_t* food;                // food position
 snake_t* seek;                // seek the body
 
+int length;
 int score;
 int highScore;
 int scoreStep;

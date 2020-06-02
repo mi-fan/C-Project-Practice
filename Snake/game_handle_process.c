@@ -113,14 +113,18 @@ void snakeMove(void) {
 	if (TRUE == biteSelf() || TRUE == hitWall()) {
 		gameResult = G_FAIL;
 	}
+	else if (TRUE == growMax()) {
+		gameResult = G_WIN;
+	}
 }
 
 /*************************************
-* Snake move without keyboard control
+* Snake move with keyboard control
+* endless move until game ends
 **************************************/
 void keyboardControl(void) {
 	
-	directionStatus = RIGHT; // set default direction to rigth
+	directionStatus = RIGHT; // set default direction to right
 
 	while (TRUE) {
 		showGameInfo();
@@ -155,7 +159,7 @@ void keyboardControl(void) {
 		}
 		else if (GetAsyncKeyState(VK_ESCAPE)) {
 			gameResult = G_QUIT;
-			break;
+			return;
 		}
 		else if (GetAsyncKeyState(0x31)) {
 			speedUp();
@@ -165,6 +169,9 @@ void keyboardControl(void) {
 		}
 		Sleep(sleepTime);
 		snakeMove();
-		
+
+		if ((gameResult == G_FAIL) || (gameResult == G_WIN)) {
+			return;
+		}
 	}
 }

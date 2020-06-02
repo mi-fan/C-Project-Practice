@@ -118,13 +118,10 @@ void drawMenu(void) {
 	}
 
 	color(WHITE);
-	gotoxy(35, 22);
+	gotoxy(35, 23);
 	printf("1. Start Game");
 
-	gotoxy(55, 22);
-	printf("2. Instruction");
-
-	gotoxy(35, 24);
+	gotoxy(55, 23);
 	printf("3. Quit");
 
 	color(PINK);
@@ -192,4 +189,83 @@ void showGameInfo(void) {
 	printf("3. Press 2 to speed down");
 	gotoxy(60, 19);
 	printf("*------------------------------*");
+}
+
+/*******************************
+* Show the game end window
+*******************************/
+void showGameEndWindow(void) {
+	system("CLS");
+
+	gotoxy(35, 9);
+
+	// show the text according to game result
+	switch (gameResult)
+	{
+	case G_FAIL:
+		color(GRAY);
+		printf("Game Over!");
+		break;
+	case G_QUIT:
+		color(RED);
+		printf("Please be more patient...");
+		break;
+	case G_WIN:
+		color(YELLOW);
+		printf("Congratulations! You are the winner!");
+		break;
+	default:
+		break;
+	}
+
+	gotoxy(43, 12);
+	color(BL_GR_LIGHT);
+	printf("Your final score is %d", score);
+
+	// print highscore
+	gotoxy(33, 16);
+	if (score > highScore) {
+		color(PINK);
+		printf("New Highscore! Great Job!");
+		File_In();
+	}
+	else {
+		color(GREEN_LIGTH);
+		printf("Keep playing, you need %d to update highscore", highScore - score);
+	}
+}
+
+/***********************************
+* Show further selection after end
+***********************************/
+int selectionAfterEnd(void) {
+	int select;
+
+	gotoxy(25, 23);
+	printf("Play again[1]");
+
+	gotoxy(52, 23);
+	printf("Quit[2]");
+	
+	gotoxy(46, 25);
+	color(BLUE_LIGHT);
+	printf("You choose...");
+
+	do 
+	{
+		scanf_s("%d", &select);
+
+		switch (select)
+		{
+		case 1:
+			return G_RESUME;
+		case 2:
+			return G_QUIT;
+		default:
+			color(GRAY);
+			gotoxy(46, 27);
+			printf("Please choose valid number[1/2] ... ");
+			break;
+		}
+	} while (TRUE);
 }
