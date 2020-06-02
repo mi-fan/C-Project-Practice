@@ -157,10 +157,10 @@ void keyboardControl(void) {
 			gameResult = G_QUIT;
 			break;
 		}
-		else if (GetAsyncKeyState(VK_F1)) {
+		else if (GetAsyncKeyState(0x31)) {
 			speedUp();
 		}
-		else if (GetAsyncKeyState(VK_F2)) {
+		else if (GetAsyncKeyState(0x32)) {
 			speedDown();
 		}
 		Sleep(sleepTime);
