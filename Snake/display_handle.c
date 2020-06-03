@@ -122,7 +122,7 @@ void drawMenu(void) {
 	printf("1. Start Game");
 
 	gotoxy(55, 23);
-	printf("3. Quit");
+	printf("2. Quit");
 
 	color(PINK);
 	gotoxy(29, 27);

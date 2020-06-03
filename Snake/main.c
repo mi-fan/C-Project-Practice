@@ -7,16 +7,20 @@ void illegal_Notice(void);
 int main(void) {
 
 	system("mode con cols=100 lines=30");       // set size of console
+
+	gameResult = G_NORMAL;
 	
-	drawSnakeLogo();
+	while (gameResult != G_QUIT) {
+		drawSnakeLogo();
 
-	File_Out();
+		File_Out();
 
-	drawMenu();
+		drawMenu();
 
-	selection();
+		selection();
 
-
+		showGameEndWindow();
+	}
 
 	return 0;
 }
@@ -33,6 +37,8 @@ int selection(void) {
 		color(GRAY);
 		scanf_s("%d", &sel);
 
+		status = TRUE;
+
 		switch (sel)
 		{
 		case S_START:
@@ -43,15 +49,14 @@ int selection(void) {
 			createFood();
 			keyboardControl();
 			break;
-		case S_INSTRUCT:
-			break;
 		case S_QUIT:
 			break;
 		default:
 			illegal_Notice();
+			status = FALSE;
 			break;
 		}
-	} while (status == TRUE);
+	} while (status == FALSE);
 
 }
 

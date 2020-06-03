@@ -1,4 +1,4 @@
-#include "game_handle_process.h"
+﻿#include "game_handle_process.h"
 
 //*********************************************//
 //                                             //
@@ -123,7 +123,8 @@ void snakeMove(void) {
 * endless move until game ends
 **************************************/
 void keyboardControl(void) {
-	
+	int ch;
+
 	directionStatus = RIGHT; // set default direction to right
 
 	while (TRUE) {
@@ -131,16 +132,16 @@ void keyboardControl(void) {
 
 		// GetAsyncKeyState to determine the status of specific virtual key
 		// key input only works when it is not the opposite of current direction
-		if ((GetAsyncKeyState(VK_UP) && directionStatus) != DOWN) {
+		if (GetAsyncKeyState(VK_UP) && (directionStatus != DOWN)) {
 			directionStatus = UP;           // if current direction is not down, and get up key
 		}
-		else if ((GetAsyncKeyState(VK_DOWN) && directionStatus) != UP) {
+		else if (GetAsyncKeyState(VK_DOWN) && (directionStatus != UP)) {
 			directionStatus = DOWN;
 		}
-		else if ((GetAsyncKeyState(VK_RIGHT) && directionStatus) != LEFT) {
+		else if (GetAsyncKeyState(VK_RIGHT) && (directionStatus != LEFT)) {
 			directionStatus = RIGHT;
 		}
-		else if ((GetAsyncKeyState(VK_LEFT) && directionStatus) != RIGHT) {
+		else if (GetAsyncKeyState(VK_LEFT) && (directionStatus != RIGHT)) {
 			directionStatus = LEFT;
 		}
 
