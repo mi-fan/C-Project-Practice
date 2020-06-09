@@ -58,6 +58,7 @@ void createSnake(void) {
 	snake_t* tail;
 
 	length = 0;  // init snake length
+	sleepTime = 300;
 
 	tail = (snake_t*)malloc(sizeof(snake_t));
 
@@ -213,6 +214,7 @@ void snakeMovePosition(BOOLEAN eatFlag) {
 		gotoxy(seek->x, seek->y);
 		printf("¡ö");
 		score += scoreStep;
+		createFood();    // create new food
 	}
 	else {        // clear and free old tail
 		color(BLACK);

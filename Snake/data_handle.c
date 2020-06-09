@@ -25,7 +25,7 @@ void File_In(void) {
 	FILE* fp = NULL;
 	errno_t err;
 
-	err = fopen_s(&err, "snake_data.txt", "w+");
+	err = fopen_s(&fp, "snake_data.txt", "w+");
 	fprintf_s(fp, "%d", score);
 	fclose(fp);
 }

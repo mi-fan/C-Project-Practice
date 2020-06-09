@@ -197,7 +197,7 @@ void showGameInfo(void) {
 void showGameEndWindow(void) {
 	system("CLS");
 
-	gotoxy(35, 9);
+	gotoxy(39, 9);
 
 	// show the text according to game result
 	switch (gameResult)
@@ -218,18 +218,19 @@ void showGameEndWindow(void) {
 		break;
 	}
 
-	gotoxy(43, 12);
+	gotoxy(35, 12);
 	color(BL_GR_LIGHT);
 	printf("Your final score is %d", score);
 
 	// print highscore
-	gotoxy(33, 16);
 	if (score > highScore) {
+		gotoxy(33, 16);
 		color(PINK);
 		printf("New Highscore! Great Job!");
 		File_In();
 	}
 	else {
+		gotoxy(25, 16);
 		color(GREEN_LIGTH);
 		printf("Keep playing, you need %d to update highscore", highScore - score);
 	}
