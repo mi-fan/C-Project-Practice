@@ -11,6 +11,8 @@
 * Draw one snake in welcome window
 ***********************************/
 void drawSnakeLogo(void) {
+	system("CLS");
+
 	color(PURPLE);
 	gotoxy(35, 1);
 	printf("/^\\/^\\");
@@ -195,9 +197,11 @@ void showGameInfo(void) {
 * Show the game end window
 *******************************/
 void showGameEndWindow(void) {
+	int ch;
+
 	system("CLS");
 
-	gotoxy(39, 9);
+	gotoxy(39, 7);
 
 	// show the text according to game result
 	switch (gameResult)
@@ -224,16 +228,21 @@ void showGameEndWindow(void) {
 
 	// print highscore
 	if (score > highScore) {
-		gotoxy(33, 16);
+		gotoxy(33, 17);
 		color(PINK);
 		printf("New Highscore! Great Job!");
 		File_In();
 	}
 	else {
-		gotoxy(25, 16);
+		gotoxy(25, 17);
 		color(GREEN_LIGTH);
 		printf("Keep playing, you need %d to update highscore", highScore - score);
 	}
+
+	gotoxy(35, 22);
+	color(GRAY);
+	printf("press any key to continue...");
+	scanf_s("%d", &ch);
 }
 
 /***********************************
