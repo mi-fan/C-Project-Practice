@@ -186,9 +186,9 @@ void showGameInfo(void) {
 	gotoxy(64, 15);
 	printf("1. Don't crash to the wall");
 	gotoxy(64, 16);
-	printf("2. Press 1 to speed up");
+	printf("2. Press NUM 1 to speed up");
 	gotoxy(64, 17);
-	printf("3. Press 2 to speed down");
+	printf("3. Press NUM 2 to speed down");
 	gotoxy(60, 19);
 	printf("*------------------------------*");
 }
@@ -197,7 +197,7 @@ void showGameInfo(void) {
 * Show the game end window
 *******************************/
 void showGameEndWindow(void) {
-	int ch;
+	int ch = 0;
 
 	system("CLS");
 
@@ -241,8 +241,11 @@ void showGameEndWindow(void) {
 
 	gotoxy(2, 22);
 	color(GRAY);
-	printf("press any key to continue...");
-	ch = _getch();
+	printf("press A to continue...");
+	while ((ch != 'A')&& (ch != 'a')) {
+		ch = _getch();
+	}
+
 }
 
 /***********************************
