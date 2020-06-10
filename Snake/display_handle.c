@@ -13,7 +13,7 @@
 void drawSnakeLogo(void) {
 	system("CLS");
 
-	color(PURPLE);
+	color(YELLOW);
 	gotoxy(35, 1);
 	printf("/^\\/^\\");
 
@@ -128,14 +128,14 @@ void drawMenu(void) {
 
 	color(PINK);
 	gotoxy(29, 27);
-	printf("Please select [1/2/3] : [ ]\b\b");
+	printf("Please select [1/2] : [ ]\b\b");
 }
 
 /*******************************
 * Draw the game map
 *******************************/
 void drawMap(void) {
-	int i, j;
+	int i;
 
 	// draw the top and bottom walls
 	color(PURPLE);
@@ -239,10 +239,10 @@ void showGameEndWindow(void) {
 		printf("Keep playing, you need %d to update highscore", highScore - score);
 	}
 
-	gotoxy(35, 22);
+	gotoxy(2, 22);
 	color(GRAY);
 	printf("press any key to continue...");
-	scanf_s("%d", &ch);
+	ch = _getch();
 }
 
 /***********************************
