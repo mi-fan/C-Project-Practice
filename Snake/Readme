@@ -1,0 +1,9 @@
+V1.0 complete the basic game process: 
+game start
+game fails when snake hit the wall or bite body
+game win until snake length reaches max
+
+V1.1 plan:
+Adjust text display in game end window
+Improve game experience by reduce change direction latency
+Add highscore leader boards show at least top three scores and corresponding player names
