@@ -1,11 +1,13 @@
-#include "screen_handle.h"
+/******************************************************
+*
+*  Description:
+*
+*  Functions for text color and cursor control
+*
+*
+******************************************************/
 
-//*********************************************//
-//                                             //
-// Define the functions used for screen color  //
-// and cursor control                          //
-//                                             //
-//*********************************************//
+#include "screen_handle.h"
 
 /*******************************
 * Set text color
