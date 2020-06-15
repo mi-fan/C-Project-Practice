@@ -1,0 +1,13 @@
+Introduction:
+Build a library management system with window UI. The system should satisfy the basic requirement for a small size book store and library.
+
+The basic functions:
+1. Book information research
+2. Book repository management
+3. System information management
+4. Sales information management
+5. Administrator authorities
+
+Technical notes:
+a. The book information should be managed on MySQL.
+b. WINAPI will be used for UI control.
