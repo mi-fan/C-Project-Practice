@@ -24,8 +24,6 @@ DROP TABLE IF EXISTS `tb_counter`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tb_counter` (
   `name` varchar(25) NOT NULL,
-  `password` varchar(25) NOT NULL,
-  `level` int NOT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -48,4 +46,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-20 21:41:20
+-- Dump completed on 2020-06-20 22:05:15
