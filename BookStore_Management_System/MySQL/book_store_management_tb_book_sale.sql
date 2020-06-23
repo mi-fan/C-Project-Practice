@@ -32,7 +32,8 @@ CREATE TABLE `tb_book_sale` (
   `date` timestamp(6) NOT NULL,
   `money` double NOT NULL,
   PRIMARY KEY (`salecode`),
-  UNIQUE KEY `operator_UNIQUE_bs` (`operator`)
+  UNIQUE KEY `operator_UNIQUE_bs` (`operator`),
+  UNIQUE KEY `barcode_UNIQUE` (`barcode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='			';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-23 21:47:10
+-- Dump completed on 2020-06-23 23:40:59

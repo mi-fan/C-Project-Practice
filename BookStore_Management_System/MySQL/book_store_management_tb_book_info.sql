@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `tb_book_info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tb_book_info` (
-  `barcode` varchar(25) NOT NULL,
+  `barcode` varchar(45) NOT NULL,
   `bookname` varchar(45) NOT NULL,
   `easymark` varchar(45) NOT NULL,
   `author` varchar(45) NOT NULL,
@@ -31,7 +31,13 @@ CREATE TABLE `tb_book_info` (
   `note` varchar(45) NOT NULL,
   `category` varchar(45) NOT NULL,
   `price` double NOT NULL,
-  PRIMARY KEY (`barcode`)
+  PRIMARY KEY (`barcode`),
+  CONSTRAINT `bar1` FOREIGN KEY (`barcode`) REFERENCES `tb_stock_info` (`barcode`),
+  CONSTRAINT `bar2` FOREIGN KEY (`barcode`) REFERENCES `tb_book_sale_refund` (`barcode`),
+  CONSTRAINT `bar3` FOREIGN KEY (`barcode`) REFERENCES `tb_book_sale` (`barcode`),
+  CONSTRAINT `bar4` FOREIGN KEY (`barcode`) REFERENCES `tb_book_adjust` (`barcode`),
+  CONSTRAINT `bar5` FOREIGN KEY (`barcode`) REFERENCES `tb_book_input_return` (`barcode`),
+  CONSTRAINT `bar6` FOREIGN KEY (`barcode`) REFERENCES `tb_book_input` (`barcode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -53,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-20 22:05:14
+-- Dump completed on 2020-06-23 23:40:59

@@ -31,7 +31,9 @@ CREATE TABLE `tb_book_input_return` (
   `store` varchar(45) NOT NULL,
   `count` int NOT NULL,
   `money` double NOT NULL,
-  PRIMARY KEY (`returncode`)
+  PRIMARY KEY (`returncode`),
+  UNIQUE KEY `operator_UNIQUE_ir` (`operator`),
+  UNIQUE KEY `barcode_UNIQUE` (`barcode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -53,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-20 22:05:15
+-- Dump completed on 2020-06-23 23:41:00
