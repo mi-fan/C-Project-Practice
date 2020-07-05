@@ -24,7 +24,12 @@ DROP TABLE IF EXISTS `tb_store_info`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tb_store_info` (
   `storename` varchar(25) NOT NULL,
-  PRIMARY KEY (`storename`)
+  PRIMARY KEY (`storename`),
+  UNIQUE KEY `storename_UNIQUE` (`storename`),
+  CONSTRAINT `store1` FOREIGN KEY (`storename`) REFERENCES `tb_book_input` (`store`),
+  CONSTRAINT `store2` FOREIGN KEY (`storename`) REFERENCES `tb_book_input_return` (`store`),
+  CONSTRAINT `store3` FOREIGN KEY (`storename`) REFERENCES `tb_book_adjust` (`store`),
+  CONSTRAINT `store_main` FOREIGN KEY (`storename`) REFERENCES `tb_stock_info` (`store`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -46,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-23 23:40:59
+-- Dump completed on 2020-07-05 16:57:42

@@ -32,6 +32,7 @@ CREATE TABLE `tb_book_info` (
   `category` varchar(45) NOT NULL,
   `price` double NOT NULL,
   PRIMARY KEY (`barcode`),
+  UNIQUE KEY `category_UNIQUE` (`category`),
   CONSTRAINT `bar1` FOREIGN KEY (`barcode`) REFERENCES `tb_stock_info` (`barcode`),
   CONSTRAINT `bar2` FOREIGN KEY (`barcode`) REFERENCES `tb_book_sale_refund` (`barcode`),
   CONSTRAINT `bar3` FOREIGN KEY (`barcode`) REFERENCES `tb_book_sale` (`barcode`),
@@ -59,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-23 23:40:59
+-- Dump completed on 2020-07-05 16:57:41
