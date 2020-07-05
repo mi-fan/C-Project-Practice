@@ -1,0 +1,9 @@
+Name: Student card consumption system
+Introduction: Virtual system to manage the student consumptions through student cards in school
+Applications:
+ a. Create the student profile
+ b. Add/Delete/Read/Query the student consumption history
+ c. Save records to files
+ 
+ Start date: 2020/7/5
+ 
