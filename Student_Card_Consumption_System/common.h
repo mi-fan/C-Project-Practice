@@ -1,7 +1,7 @@
 #pragma once
 /***********************************************************
  *
- * Common declaration and definitions
+ *         Common declaration and definitions
  *
  ***********************************************************/
 #include <stdio.h>
@@ -17,6 +17,11 @@
 #define LEN          sizeof(struct scoreNode)
 #define DEBUG
 
+#ifndef TRUE
+#define TRUE         (1)
+#define FALSE        (0)
+#endif // !TRUE
+
 /***********************************************************
  * TYPE DEFINITION
  ***********************************************************/
@@ -30,13 +35,22 @@ struct scoreNode
 
 typedef struct scoreNode *Score;
 
+typedef enum _Choice_t
+{
+	CREATE = 0,
+	LOAD,
+	QUERY,
+	DEL,
+	ADD,
+	PRINT,
+	SAVE,
+	EXIT,
+	CHOICE_MAX
+}Choice_t;
+
 /***********************************************************
  * FUNCTION DECLARATION
  ***********************************************************/
-
-// Show the top menu for selection
-void menu(void);
-
 // Create student consumption record
 Score create(void);
 
@@ -61,3 +75,6 @@ void saveToFile(Score node);
 /***********************************************************
  * GLOBAL VARIABLES
  ***********************************************************/
+// Link head and current node
+Score headStudent;
+Score currStudent;
