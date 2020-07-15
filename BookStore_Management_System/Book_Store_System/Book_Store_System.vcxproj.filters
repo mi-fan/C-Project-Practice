@@ -27,6 +27,9 @@
     <ClInclude Include="Book_Store_System.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="utility.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Book_Store_System.rc">
