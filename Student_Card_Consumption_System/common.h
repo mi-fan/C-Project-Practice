@@ -9,6 +9,10 @@
 #include <string.h>
 #include <conio.h>
 #include <windows.h>
+#include "data_management.h"
+#include "display_handle.h"
+#include "file_handle.h"
+#include "link_handle.h"
 
 /***********************************************************
  * MACRO DEFINITION
@@ -25,56 +29,54 @@
 /***********************************************************
  * TYPE DEFINITION
  ***********************************************************/
-struct scoreNode
+struct recordNode
 {
 	int  id;                         // student ID
-	int  cost;                       // cost in consumption
+	int  money;                       // cost in consumption
 	char name[NAME_LEN];             // student name
-	struct scoreNode *next;          // next node in link
+	struct recordNode* next;          // next node in link
 };
 
-typedef struct scoreNode *Score;
+typedef struct recordNode* Record;
 
 typedef enum _Choice_t
 {
-	CREATE = 0,
+	EXIT = 0,
+	CREATE,
 	LOAD,
 	QUERY,
 	DEL,
 	ADD,
 	PRINT,
 	SAVE,
-	EXIT,
 	CHOICE_MAX
 }Choice_t;
 
 /***********************************************************
  * FUNCTION DECLARATION
  ***********************************************************/
-// Create student consumption record
-Score create(void);
-
 // Load student consumption record
-Score load(Score head);
+Record load(Record head);
 
 // Query student consumption record
-Score query(Score head);
+Record query(Record head);
 
 // Delete student consumption record
-Score del(Score head);
+Record del(Record head);
 
 // Add student consumption record
-Score add(Score head);
+Record add(Record head);
 
 // Show all records
-void printAll(Score head);
+void printAll(Record head);
 
 // Save the records to local file
-void saveToFile(Score node);
+void saveToFile(Record node);
 
 /***********************************************************
  * GLOBAL VARIABLES
  ***********************************************************/
 // Link head and current node
-Score headStudent;
-Score currStudent;
+Record headStudent;
+Record currStudent;
+int g_record_len;
