@@ -19,19 +19,12 @@ void initLink(void) {
 /***********************************************************
  * Search the link for specific student ID
  ***********************************************************/
-int searchSameId(Record head, int id) {
-	int result = FALSE;
+Record searchSameId(Record head, int id) {
 	Record seek = head;
 
-	// no same ID if link is empty
-	if (head == NULL) {
-		return result;
-	}
-
-	do {
+	while (seek != NULL){
 		if (seek->id == id) {
-			result = TRUE;
-			break;
+			return seek;
 		}
 
 		if (seek->next == NULL) {
@@ -39,9 +32,9 @@ int searchSameId(Record head, int id) {
 		}
 
 		seek = seek->next;
-	} while (seek != NULL);
+	}
 
-	return result;
+	return NULL;
 }
 
 /***********************************************************
@@ -70,6 +63,9 @@ void sortLink(Record head) {
 			}
 			tmp1 = tmp2;
 		}
+
+		tmp1 = head;
+		tmp2 = head;
 	}
 }
 #endif

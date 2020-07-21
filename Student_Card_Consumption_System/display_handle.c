@@ -14,11 +14,19 @@ inline void setTextColorRed(HANDLE handle) {
 }
 
 /***********************************************************
-* Set text color to black
-***********************************************************/
+ * Set text color to black
+ ***********************************************************/
 inline void setTextColorBlack(HANDLE handle) {
 	SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY |
 		BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
+}
+
+/***********************************************************
+ * Set text color to purple
+ ***********************************************************/
+inline void setTextColorPurple(HANDLE handle) {
+	SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY |
+		BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_BLUE);
 }
 
 /***********************************************************

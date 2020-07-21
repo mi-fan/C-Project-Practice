@@ -11,7 +11,6 @@ static int run_modules(int choice);
   * main()
   ***********************************************************/
 int main(void) {
-	HANDLE hanle;
 	int choice;
 	int status = TRUE;
 
@@ -22,7 +21,7 @@ int main(void) {
 	system("color f0");
 
 	// get console hander
-	hanle = GetStdHandle(STD_OUTPUT_HANDLE);
+	g_output_handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	// main body
 	do {

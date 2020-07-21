@@ -76,6 +76,9 @@ void saveToFile(Record node);
 /***********************************************************
  * GLOBAL VARIABLES
  ***********************************************************/
+// Output handler
+HANDLE g_output_handle;
+
 // Link head and current node
 Record headStudent;
 Record currStudent;
