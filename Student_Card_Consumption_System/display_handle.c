@@ -6,7 +6,7 @@
  *
  ***********************************************************/
 /***********************************************************
- * Set text color to read
+ * Set text color to red
  ***********************************************************/
 inline void setTextColorRed(HANDLE handle) {
 	SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | BACKGROUND_INTENSITY |
@@ -27,6 +27,22 @@ inline void setTextColorBlack(HANDLE handle) {
 inline void setTextColorPurple(HANDLE handle) {
 	SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY |
 		BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | FOREGROUND_RED | FOREGROUND_BLUE);
+}
+
+/***********************************************************
+ * Set text color to blue
+ ***********************************************************/
+inline void setTextColorBlue(HANDLE handle) {
+	SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | BACKGROUND_INTENSITY |
+		BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | FOREGROUND_BLUE);
+}
+
+/***********************************************************
+ * Set text color to pink
+ ***********************************************************/
+inline void setTextColorPink(HANDLE handle) {
+	SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | BACKGROUND_INTENSITY |
+		BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | FOREGROUND_BLUE | FOREGROUND_RED);
 }
 
 /***********************************************************
