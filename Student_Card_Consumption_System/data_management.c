@@ -184,6 +184,68 @@ Record query(void) {
 		_getch();
 	} while (1);
 
+	return NULL;
+}
 
+/***********************************************************
+ * Delete the record of one student
+ ***********************************************************/
+Record delete(void) {
+	int id;
+	int deleteCnt = 0;
+	char result;
+	Record deleteStudent;
 
+	system("CLS");
+
+	setTextColorBlue(g_output_handle);
+
+	printf("\n\n\t\t\t Delete the student consumption record:\n");
+
+	setTextColorBlack(g_output_handle);
+
+	setTextColorBlack(g_output_handle);
+
+	do {
+		printf("\n\n\tPlease input the student ID (input 0 to exit):\n");
+
+		scanf_s("%d", &id);
+
+		if (id == 0) {
+			return NULL;
+		}
+		else if (id < 0) {
+			printf("\tInvalid student ID (smaller than zero)!");
+			continue;
+		}
+		else if (headStudent == NULL) {
+			printf("\tDatabase is empty, please create new records!");
+			_getch();
+			return NULL;
+		}
+		else if ((deleteStudent = searchSameId(headStudent, id)) == NULL)
+		{
+			printf("\tStudent ID does not exist, please input again.");
+			continue;
+		}
+		else {    // ID > 0 and student exist
+			printf("\tAre you sure to delete record of student %d ? [Y/N]", id);
+			result = _getch();
+			if ((result != 'y') && (result != 'Y')){
+				continue;
+			}
+
+			deleteFromLink(headStudent, id);
+
+			printf("\tDelete succeed!");
+
+			deleteCnt++;
+		}
+	} while (1);
+
+	printf("\t\t---------------------------------------------------\n");
+	printf("\t\t  Total delete %d records, current count is %d\n", deleteCnt, g_record_len);
+	printf("\t\t---------------------------------------------------\n");
+
+	return NULL;
 }

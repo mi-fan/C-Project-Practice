@@ -69,3 +69,48 @@ void sortLink(Record head) {
 	}
 }
 #endif
+
+/***********************************************************
+ * Delete the node of specific ID
+ ***********************************************************/
+Record deleteFromLink(Record head, int id) {
+	Record seekStudent = head;
+	Record nextStudent;
+
+	// if delete the head record
+	if (head->id == id) {
+		if (head->next == NULL) {
+			head = NULL;
+		}
+		else {
+			head = head->next;
+		}
+		g_record_len--;
+
+		return head;
+	}
+
+	// search the next node
+	// note that input id certainly exists in link
+	while (seekStudent->next != NULL) {
+		nextStudent = seekStudent->next;
+
+		// find the specific student id
+		if (nextStudent->id == id) {
+			// the found record is last one
+			if (nextStudent->next == NULL) {
+				seekStudent->next = NULL;
+			}
+			else {  // not last one, cut it from link
+				seekStudent->next = nextStudent->next;
+			}
+			g_record_len--;
+			return head;
+		}
+		else {
+			seekStudent = seekStudent->next;
+		}
+	}
+
+	return NULL;
+}
