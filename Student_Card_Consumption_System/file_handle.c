@@ -6,11 +6,11 @@
  *
  ***********************************************************/
  /***********************************************************
-  * Load records from local file
+  * Load all records from local file
   ***********************************************************/
 Record load(Record head) {
 	Record inputStudent;
-	FILE* fp;
+	FILE* fp = NULL;
 	char fileName[NAME_LEN];
 	int i;
 
@@ -31,14 +31,14 @@ Record load(Record head) {
 	setTextColorBlack(g_output_handle);
 
 	// error handle
-	if ((fp = fopen(fileName, "r+")) == NULL) {
+	if (fopen_s(fp, fileName, "r+") != 0) {
 		setTextColorRed(g_output_handle);
 
 		printf("\n\n\t    Can not open file. File does not exist!\n");
 		
 		setTextColorBlack(g_output_handle);
 
-		getch();
+		_getch();
 
 		return NULL; //TODO
 	}
@@ -74,7 +74,7 @@ Record load(Record head) {
 		currStudent->next = NULL;
 
 		printf("\t\t---------------------------------------------------\n");
-		getch();
+		_getch();
 		fclose(fp);
 
 		return headStudent;

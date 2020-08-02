@@ -1,4 +1,5 @@
 #include "data_management.h"
+#include "display_handle.h"
 
 /***********************************************************
  *
@@ -71,7 +72,7 @@ Record create(void) {
 	printf("\t      Total %d student records\n", g_record_len);
 	setTextColorBlack(g_output_handle);
 
-	getch();
+	_getch();
 
 	return headStudent;
 }
@@ -79,7 +80,7 @@ Record create(void) {
 /***********************************************************
  * Add new consumption record to existing student
  ***********************************************************/
-Record create(void) {
+Record add(void) {
 	Record tmpStu;
 	int id;
 	int inputMoney = 0;
@@ -129,4 +130,60 @@ Record create(void) {
 		tmpStu->money += inputMoney;
 
 	} while (1);
+}
+
+/***********************************************************
+ * Query the consumption record of one student from ID
+ ***********************************************************/
+Record query(void) {
+	int id;
+	Record outputStudent;
+
+	system("CLS");
+
+	setTextColorBlue(g_output_handle);
+
+	printf("\n\n\t\t\t Query the student consumption record:\n");
+
+	setTextColorBlack(g_output_handle);
+
+	do {
+		printf("\n\n\tPlease input the student ID (input 0 to exit):\n");
+
+		scanf_s("%d", &id);
+
+		setTextColorRed(g_output_handle);
+
+		if (id == 0) {
+			return NULL;
+		}
+		else if (id < 0) {
+			printf("\tInvalid student ID (smaller than zero)!");
+			continue;
+		}
+		else if (headStudent == NULL) {
+			printf("\tDatabase is empty, please create new records!");
+			_getch();
+			return NULL;
+		}
+		else if ((outputStudent = searchSameId(headStudent, id)) == NULL)
+		{
+			printf("\tStudent ID does not exist, please input again.");
+			continue;
+		}
+		else{    // ID > 0 and student exist
+			setTextColorBlack(g_output_handle);
+		}
+
+		// show the record of the student
+		printf("\t\t---------------------------------------------------\n");
+		printf("\t\t  | ID\t   | name\t  | money\t\n");
+		printf("\t\t---------------------------------------------------\n");
+		printf("\t\t  | %d\t   | %s\t  | %d\t\n", outputStudent->id, outputStudent->name, outputStudent->money);
+		printf("\t\t---------------------------------------------------\n");
+		_getch();
+	} while (1);
+
+
+
 }

@@ -4,4 +4,5 @@
 /***********************************************************
  * FUNCTION DECLARATION
  ***********************************************************/
-void initLink(void);
+//void initLink(void);
+//Record searchSameId(Record head, int id);

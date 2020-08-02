@@ -55,17 +55,11 @@ typedef enum _Choice_t
 /***********************************************************
  * FUNCTION DECLARATION
  ***********************************************************/
-// Load student consumption record
-Record load(Record head);
-
 // Query student consumption record
 Record query(Record head);
 
 // Delete student consumption record
 Record del(Record head);
-
-// Add student consumption record
-Record add(Record head);
 
 // Show all records
 void printAll(Record head);

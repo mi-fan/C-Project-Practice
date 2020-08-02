@@ -17,7 +17,7 @@ void initLink(void) {
 #endif
 #if 1
 /***********************************************************
- * Search the link for specific student ID
+ * Search the link for student ID and return the node
  ***********************************************************/
 Record searchSameId(Record head, int id) {
 	Record seek = head;
