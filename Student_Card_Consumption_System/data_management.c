@@ -202,14 +202,14 @@ Record delete(void) {
 
 	printf("\n\n\t\t\t Delete the student consumption record:\n");
 
-	setTextColorBlack(g_output_handle);
-
-	setTextColorBlack(g_output_handle);
-
 	do {
+		setTextColorBlack(g_output_handle);
+
 		printf("\n\n\tPlease input the student ID (input 0 to exit):\n");
 
 		scanf_s("%d", &id);
+
+		setTextColorRed(g_output_handle);
 
 		if (id == 0) {
 			return NULL;
@@ -237,11 +237,15 @@ Record delete(void) {
 
 			deleteFromLink(headStudent, id);
 
+			setTextColorBlue(g_output_handle);
+
 			printf("\tDelete succeed!");
 
 			deleteCnt++;
 		}
 	} while (1);
+
+	setTextColorBlack(g_output_handle);
 
 	printf("\t\t---------------------------------------------------\n");
 	printf("\t\t  Total delete %d records, current count is %d\n", deleteCnt, g_record_len);
