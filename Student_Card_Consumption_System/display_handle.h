@@ -10,3 +10,4 @@ inline void setTextColorBlack(HANDLE handle);
 inline void setTextColorPurple(HANDLE handle);
 inline void setTextColorBlue(HANDLE handle);
 inline void setTextColorPink(HANDLE handle);
+inline void setTextColorGreen(HANDLE handle);
