@@ -80,3 +80,26 @@ Record load(Record head) {
 		return headStudent;
 	}
 }
+
+/***********************************************************
+ * Save data to local file
+ ***********************************************************/
+void saveToFile(Record pos) {
+	FILE* fp;
+
+	// create and open file first
+	if ((fp = fopen("E:\\consumption", "wb")) == NULL) {
+		setTextColorRed(g_output_handle);
+		printf("Cannot open this file!\n");
+	}
+	else {
+		while (pos != NULL){
+			fprintf_s(fp, "%d,%s,%s,%d\t\t\t", pos->id, pos->name, pos->money);
+			pos = pos->next;
+		}
+		printf("\t\tFile saved at E:\\\consume \n");
+		getch();
+	}
+
+	fclose(fp);
+}

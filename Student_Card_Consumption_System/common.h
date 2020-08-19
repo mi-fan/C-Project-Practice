@@ -61,12 +61,6 @@ Record query(Record head);
 // Delete student consumption record
 Record del(Record head);
 
-// Show all records
-void printAll(Record head);
-
-// Save the records to local file
-void saveToFile(Record node);
-
 /***********************************************************
  * GLOBAL VARIABLES
  ***********************************************************/
