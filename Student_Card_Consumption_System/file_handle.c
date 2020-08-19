@@ -85,10 +85,10 @@ Record load(Record head) {
  * Save data to local file
  ***********************************************************/
 void saveToFile(Record pos) {
-	FILE* fp;
+	FILE* fp = NULL;
 
 	// create and open file first
-	if ((fp = fopen("E:\\consumption", "wb")) == NULL) {
+	if (fopen_s(fp, "E:\\consumption", "wb") != 0) {
 		setTextColorRed(g_output_handle);
 		printf("Cannot open this file!\n");
 	}
@@ -98,7 +98,7 @@ void saveToFile(Record pos) {
 			pos = pos->next;
 		}
 		printf("\t\tFile saved at E:\\\consume \n");
-		getch();
+		_getch();
 	}
 
 	fclose(fp);
