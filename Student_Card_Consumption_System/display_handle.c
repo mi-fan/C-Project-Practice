@@ -92,7 +92,7 @@ void printAll(Record head) {
 	printf("\n\n\t\t\t\t Show all student consumption records\n");
 	setTextColorBlack(g_output_handle);
 
-	if (headStudent == NULL) {
+	if ((headStudent == NULL)||(headStudent->id < 0)) {
 		setTextColorRed(g_output_handle);
 		printf("\n\t\t No records. Please create new record\n");
 		setTextColorBlack(g_output_handle);
