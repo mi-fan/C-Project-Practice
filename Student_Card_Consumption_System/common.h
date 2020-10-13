@@ -55,11 +55,6 @@ typedef enum _Choice_t
 /***********************************************************
  * FUNCTION DECLARATION
  ***********************************************************/
-// Query student consumption record
-Record query(Record head);
-
-// Delete student consumption record
-Record del(Record head);
 
 /***********************************************************
  * GLOBAL VARIABLES

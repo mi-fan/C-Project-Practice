@@ -44,7 +44,7 @@ int main(void) {
  ***********************************************************/
 static int run_modules(int choice) {
 	int status = TRUE;
-#if 0
+#if 1
 	switch (choice)
 	{
 	// create link list of students
@@ -61,7 +61,7 @@ static int run_modules(int choice) {
 		break;
 	// delete the consumption info
 	case DEL:
-		headStudent = del(headStudent);
+		headStudent = delete(headStudent);
 		break;
 	// add student consumption info
 	case ADD:
